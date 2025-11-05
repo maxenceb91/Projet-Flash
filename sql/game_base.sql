@@ -197,3 +197,25 @@ FROM `message`
 JOIN `user` ON user.id = message.user_id
 WHERE message.created_at >= NOW() - INTERVAL 24 HOUR
 ORDER BY created_at ASC
+
+-- Story 11 :  créer une messagerie privée sur mon site internet --
+
+-- Création de la table private message --
+
+CREATE TABLE `private_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_sender_id` int(11) NOT NULL,
+  `user_receiver_id` int(11) NOT NULL,
+  `message` TEXT NOT NULL,
+  `is_read` int(1) NOT NULL DEFAULT 0,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `read_at` DATETIME DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_sender_id`) REFERENCES `user`(`id`),
+  FOREIGN KEY (`user_receiver_id`) REFERENCES `user`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+-- Requête pour envoyer un message privé --
+
+INSERT INTO `private_message` (`user_sender_id`, `user_receiver_id`, `message`)
+VALUES (@user_sender_id, @user_receiver_id, @message);
