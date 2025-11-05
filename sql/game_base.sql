@@ -223,24 +223,24 @@ VALUES (@user_sender_id, @user_receiver_id, @message);
 -- Story 12 : ajouter des données de test et gérer la création, la modification et la suppression d’un message--
 
 INSERT INTO `private_message` (`user_sender_id`, `user_receiver_id`, `message`)
-VALUES (1, 2, "coucou"),
-       (2, 1, "salut"),
-       (3, 4, "hello"),
-       (4, 3, "hi"),
-       (5, 1, "yo"),
-       (1, 3, "quoi de neuf ?"),
-       (3, 1, "rien de spécial"), 
-       (2, 4, "ça va ?"),
-       (4, 2, "oui et toi ?"),
-       (5, 2, "on se voit ce soir ?"),
-       (2, 5, "avec plaisir"),
-       (3, 5, "on se fait une partie ?"),
+VALUES (1, 2, "gg bg"),
+       (2, 1, "i am the one who knocks"),
+       (3, 4, "c'est comme des chevals qui apellent des chevals"),
+       (4, 3, "je ordinateur"),
+       (5, 1, "tu danse pas tu monte pas"),
+       (1, 3, "arete louloute"),
+       (3, 1, "je suis le danger skyler"),
+       (2, 4, "ta 2 bras 2 jambe"),
+       (4, 2, "ma"),
+       (5, 2, "ff"),
+       (2, 5, "quel arret"),
+       (3, 5, "on se fait u"),
        (5, 3, "ok rdv en ligne"),
        (4, 1, "tu as vu le nouveau jeu ?"),
        (1, 4, "pas encore"),
        (5, 4, "on joue ensemble ?"),
        (4, 5, "avec joie"),
-       (2, 3, "tu as fini le niveau ?"),
+       (2, 3, "comment tu te sens "),
        (3, 2, "presque"),
        (1, 2, "on se fait une pause ?");
       
@@ -254,3 +254,27 @@ WHERE `id` = @message_id AND `user_sender_id` = @user_id;
 
 DELETE FROM `private_message`
 WHERE `id` = @message_id AND `user_sender_id` = @user_id;
+
+-- Story 13 : écrire la requête permettant d’afficher les différentes conversations entre utilisateurs --
+
+SELECT 
+  sender.pseudo AS sender_pseudo,
+  receiver.pseudo AS receiver_pseudo,
+  private_message.message,
+  private_message.created_at,
+  private_message.read_at,
+  private_message.is_read
+FROM private_message
+JOIN user AS sender ON sender.id = private_message.user_sender_id
+JOIN user AS receiver ON receiver.id = private_message.user_receiver_id
+WHERE private_message.created_at = (
+    SELECT MAX(pm.created_at)
+    FROM private_message pm
+    WHERE (
+        (pm.user_sender_id = private_message.user_sender_id AND pm.user_receiver_id = private_message.user_receiver_id)
+        OR
+        (pm.user_sender_id = private_message.user_receiver_id AND pm.user_receiver_id = private_message.user_sender_id)
+    )
+)
+AND (private_message.user_sender_id = 1 OR private_message.user_receiver_id = 1)
+ORDER BY private_message.created_at DESC;
