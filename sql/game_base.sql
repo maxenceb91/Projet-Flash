@@ -45,3 +45,73 @@ CREATE TABLE `game` (
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Story 2 : Insertion des données de test dans les tables de la base de données game_base --
+
+-- Insertion des utilisateurs de test dans la table `user` --
+
+INSERT INTO `user` (`email`, `password`, `pseudo`) VALUES
+('john.doe@gmail.com', 'hashedpassword123', 'JohnDoe'),
+('emma.smith@gmail.com', 'hashedpassword456', 'EmmaGamer'),
+('alex.garcia@gmail.com', 'hashedpassword789', 'AlexPro'),
+('sarah.wilson@gmail.com', 'hashedpassword101', 'SarahW'),
+('mike.jones@gmail.com', 'hashedpassword202', 'MikeGaming'),
+('test@gmail.com', 'test123', 'TestUser');
+
+-- Insertion des scores de test dans la table `score` --
+
+INSERT INTO `score` (`user_id`, `game_id`, `difficulty`, `score`) VALUES
+(1, 1, '2', 1580),
+(1, 2, '1', 760),
+(2, 1, '3', 2380),
+(2, 3, '2', 1765),
+(3, 1, '1', 920),
+(3, 2, '2', 1420),
+(4, 3, '3', 3050),
+(4, 1, '2', 1890),
+(5, 2, '3', 2750),
+(5, 3, '1', 640),
+(1, 3, '3', 2100),
+(2, 2, '1', 430),
+(3, 3, '2', 1630),
+(4, 2, '1', 980),
+(5, 1, '2', 1505),
+(1, 1, '1', 520),
+(2, 1, '2', 1340),
+(3, 2, '3', 2600),
+(4, 3, '2', 1980),
+(5, 2, '1', 710);
+
+-- Insertion des messages de test dans la table `message` --
+
+INSERT INTO `message` (`game_id`, `user_id`, `message`) VALUES
+(1, 1, 'gg bg'),
+(1, 2, 'fallait eco mat'),
+(1, 3, 'monstre brother'),
+(1, 4, 'Très addictif, bravo aux devs.'),
+(1, 5, 'J''ai battu mon record, merci !'),
+(1, 1, 'Graphismes simples mais efficaces.'),
+(1, 2, 'Peut-on avoir plus de niveaux ?'),
+(1, 3, 'Le temps imparti est parfois court.'),
+(1, 4, 'Interface fluide et rapide.'),
+(1, 5, 'alt f4 si trop dur '),
+(1, 1, 'Jouer en ligne serait un plus.'),
+(1, 2, 'Les sons encouragent bien le gameplay.'),
+(1, 3, 'Je suggère un tutoriel.'),
+(1, 4, 'ez pz.'),
+(1, 5, 'Challenge accepté pour la difficulté 3.'),
+(1, 1, 'Merci pour les mises à jour !'),
+(1, 2, 'Petit bug sur le score affiché.'),
+(1, 3, 'Jouer avec des amis serait top.'),
+(1, 4, 'Les couleurs sont agréables.'),
+(1, 5, 'prend ton temps'),
+(1, 1, 'Idée: ajouter des badges.'),
+(1, 2, 'Bon équilibre entre réflexe et mémoire.'),
+(1, 3, 'La progression est bien dosée.'),
+(1, 4, 'Temps de chargement rapide.'),
+(1, 5, 'ez au lobby go dodo');
+
+-- Insertion des jeux de test dans la table `game` --
+
+INSERT INTO `game` (`name`) 
+VALUES ('Power of memory');
