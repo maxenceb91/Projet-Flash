@@ -183,3 +183,8 @@ ORDER BY game.name, difficulty DESC, score;
 
 INSERT INTO `score` (`user_id`, `game_id`, `difficulty`, `score`)
 VALUES (@user_id, @game_id, @difficulty, @score);
+
+-- Story 9 : la requête permettant d’enregistrer un message sur le chat d’une partie --
+
+INSERT INTO `message` (`game_id`, `user_id`, `message`)
+VALUES (@game_id, @user_id, @message);
