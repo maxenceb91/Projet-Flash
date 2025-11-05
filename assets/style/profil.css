@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #070320;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.banner {
+    background-color: #d80027;
+    height: 350px;
+    position: relative;
+
+    img {
+        max-width: 200px;
+        border-radius: 50%;
+        outline: 8px solid #070320;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+}
+
+.container,
+.container-banner {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container-banner {
+    position: relative;
+    height: 100%;
+}
+
+.banner-content {
+    position: absolute;
+    left: 20px;
+    position: absolute;
+    bottom: -90px;
+    display: flex;
+    align-items: end;
+    gap: 4rem;
+
+    small {
+        color: #71717a;
+    }
+}
+
+.profil {
+    margin-top: 10rem;
+    max-width: 50%;
+
+    label,
+    input {
+        display: block;
+    }
+
+    label {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    input, textarea {
+        padding: 15px;
+        background-color: transparent;
+        border: 1px solid #333;
+        display: block;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        width: 100%;
+        color: #fff;
+        outline: none;
+        transition: all .3s;
+    }
+
+    input:focus{
+        border-color: #d80027;
+    }
+}
+
+form button {
+    padding: 15px;
+    background-color: #d80027;
+    display: block;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    width: 100%;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+@media (max-width: 768px){
+    .profil{
+        max-width: 100%;
+    }
+
+    .banner-content img{
+        width: 130px;
+    }
+
+    .banner-content{
+        gap: 1rem;
+
+        small{
+            display: none;
+        }
+
+    }
+}

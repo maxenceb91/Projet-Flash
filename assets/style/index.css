@@ -1,0 +1,312 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #070320;
+    color: #fff;
+}
+
+.container {
+    max-width: 1260px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.hero-section {
+    margin-top: 7rem;
+    position: relative;
+
+    small {
+        color: #e87d0e;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    h1 {
+        margin-top: 1.5rem;
+        font-size: 4rem;
+        max-width: 600px;
+    }
+
+    p {
+        margin-top: 10px;
+        margin-top: 2rem;
+        max-width: 420px;
+    }
+
+    a {
+        background: linear-gradient(135deg, red, orange);
+        padding: 15px 45px 15px 20px;
+        border-radius: 100px;
+        display: block;
+        width: max-content;
+        margin-top: 3rem;
+        cursor: pointer;
+        color: #fff;
+        text-decoration: none;
+
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        z-index: -1;
+        height: 100%;
+        right: 20%;
+    }
+}
+
+.game-section {
+    margin-top: 5rem;
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+
+    figure {
+        text-align: center;
+
+        figcaption {
+            margin-top: 1rem;
+        }
+    }
+}
+
+.title {
+    font-size: 2rem;
+    text-align: center;
+    margin: 5rem 0;
+}
+
+.desc {
+    margin-top: 5rem;
+    max-width: 400px;
+
+    p {
+        margin-top: 2rem;
+    }
+}
+
+.game-img-section {
+    margin-top: 5rem;
+    position: relative;
+
+    .grid-img {
+        position: absolute;
+        top: -75px;
+        right: 75px;
+    }
+}
+
+.img-bg {
+    width: 100%;
+}
+
+.stats {
+    margin-top: 5rem;
+    background-image: url(../img/Background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+
+    h2,
+    p {
+        text-align: center;
+    }
+
+    h2 {
+        padding-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat {
+        padding: 20px 50px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        width: max-content;
+        text-align: center;
+
+        span {
+            font-size: 3rem;
+            margin-bottom: .5rem;
+        }
+    }
+}
+
+.flex-3 {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 4rem;
+
+    img{
+        width: 280px;
+        border-radius: 10px;
+    }
+}
+
+.stat-blue {
+    background-color: #019adc;
+    color: #fff;
+}
+
+.stat-white {
+    background-color: #fff;
+    color: #000;
+}
+
+.flex-2 {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 4rem;
+}
+
+.stat-orange {
+    background-color: #dc7000;
+    color: #fff;
+}
+
+.stat-red {
+    background-color: #d80027;
+    color: #fff;
+}
+
+.crew {
+
+    h2,
+    p {
+        text-align: center;
+    }
+
+    h2 {
+        margin: 2rem 0;
+    }
+
+    figure {
+        figcaption {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+    }
+}
+
+.banner {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    padding: 40px;
+    align-items: center;
+    margin-top: 2rem;
+
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+}
+
+form {
+    width: 40%;
+    position: relative;
+
+    input {
+        padding: 15px;
+        background-color: #000;
+        color: #fff;
+        padding: 15px 40px;
+        border: none;
+        width: 100%;
+        outline: none;
+        border-radius: 8px;
+    }
+}
+
+.confirm-btn {
+    padding: 10px 40px;
+    background: red;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transform: translateY(-50%);
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+
+    .hero-section {
+        img {
+            display: none;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+    }
+
+    .game-section {
+        .flex {
+            display: block;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        figure {
+            text-align: start;
+        }
+
+        figcaption {
+            margin-top: 2rem !important;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .game-img-section {
+
+        .grid-img {
+
+            display: none;
+        }
+    }
+
+    .flex-3,
+    .flex-2 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stats {
+        height: auto;
+        padding: 20px;
+    }
+
+    .flex-2,
+    .flex-3 {
+        .stat {
+            width: 100% !important;
+        }
+    }
+
+    .banner {
+        flex-direction: column;
+
+        form {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+}

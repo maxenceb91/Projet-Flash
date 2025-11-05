@@ -1,0 +1,187 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #070320;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.first-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.info-container {
+    display: flex;
+
+    div {
+        width: 100%;
+        padding: 5px 0;
+    }
+
+    .social {
+
+        display: flex;
+        justify-content: center;
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        i {
+            padding: 5px;
+            border-radius: 50%;
+            background: #1C140F;
+        }
+    }
+
+    .phone,
+    .adress {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+
+        i {
+            font-size: 1.3rem;
+        }
+    }
+
+    .phone {
+        border-right: 1px solid #fff;
+        border-left: 1px solid #fff;
+    }
+
+}
+
+.social-container {
+    width: max-content !important;
+}
+
+.map-container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+
+
+    img {
+        width: 80%;
+    }
+}
+
+.contact-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.contact-container h1 {
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 189%;
+    letter-spacing: 0%;
+}
+
+.contact-container p {
+    font-size: 20px;
+}
+
+form {
+    max-width: 600px;
+    padding: 0 20px;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.flex-form {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.flex-form div {
+    width: 100%;
+
+}
+
+.flex-form div input {
+    width: 100%;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    color: #000;
+    outline: none;
+    border: none;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    min-height: 170px;
+    color: #000;
+    outline: none;
+    border: none;
+    padding: 15px;
+}
+
+.textarea {
+    margin-top: 1rem;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: end;
+    margin-top: 2rem;
+}
+
+.btn-container button {
+    padding: 15px 50px;
+    border-radius: 8px;
+    background: red;
+    cursor: pointer;
+    border: none;
+
+}
+
+@media (max-width: 1024px) {
+    .info-container {
+        display: block;
+    }
+
+    .phone{
+        border: none !important;
+    }
+
+    .contact-container h1{
+        font-size: 35px;
+    }
+
+    .social-container{
+        text-align: center;
+    }
+
+}

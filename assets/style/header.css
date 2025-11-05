@@ -1,0 +1,63 @@
+/*Header*/
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #070320;
+    z-index: 9999;
+}
+
+.logo{
+    width: 35px;
+}
+.contact-btn{
+    background-color: #d80027;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+header nav{
+    display: flex;
+    align-items: center;
+    gap: 70px;
+}
+
+header nav a {
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+
+.burger-menu{
+    display: none;
+    span{
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        display: block;
+    }
+    cursor: pointer;
+}
+
+.burger-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+@media (max-width: 768px){
+    header{
+        nav{
+            display: none;
+        }
+
+        .burger-menu{
+            display: block;
+        }
+    }
+}
