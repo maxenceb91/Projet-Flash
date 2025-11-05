@@ -120,3 +120,17 @@ VALUES ('Power of memory');
 
 INSERT INTO `user` (`email`, `password`, `pseudo`) VALUES
 ('@email','@password', '@pseudo');
+
+-- Story 4 : les requêtes permettant de modifier le mot de passe et l’adresse email d’un utilisateur -- 
+
+-- Requête pour modifier le mot de passe --
+
+UPDATE `user`
+SET `password` = @new_password
+WHERE `id` = @id_user;
+
+-- Requête pour modifier l'adresse email--
+
+UPDATE  `user`
+SET `email` = 'newemail'
+WHERE `id` = @id_user AND `password` = @password_provided;
