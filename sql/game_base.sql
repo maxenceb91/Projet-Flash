@@ -62,25 +62,25 @@ INSERT INTO `user` (`email`, `password`, `pseudo`) VALUES
 
 INSERT INTO `score` (`user_id`, `game_id`, `difficulty`, `score`) VALUES
 (1, 1, '2', 1580),
-(1, 2, '1', 760),
+(1, 1, '1', 760),
 (2, 1, '3', 2380),
-(2, 3, '2', 1765),
+(2, 1, '2', 1765),
 (3, 1, '1', 920),
-(3, 2, '2', 1420),
-(4, 3, '3', 3050),
+(3, 1, '2', 1420),
+(4, 1, '3', 3050),
 (4, 1, '2', 1890),
-(5, 2, '3', 2750),
-(5, 3, '1', 640),
-(1, 3, '3', 2100),
-(2, 2, '1', 430),
-(3, 3, '2', 1630),
-(4, 2, '1', 980),
+(5, 1, '3', 2750),
+(5, 1, '1', 640),
+(1, 1, '3', 2100),
+(2, 1, '1', 430),
+(3, 1, '2', 1630),
+(4, 1, '1', 980),
 (5, 1, '2', 1505),
 (1, 1, '1', 520),
 (2, 1, '2', 1340),
-(3, 2, '3', 2600),
-(4, 3, '2', 1980),
-(5, 2, '1', 710);
+(3, 1, '3', 2600),
+(4, 1, '2', 1980),
+(5, 1, '1', 710);
 
 -- Insertion des messages de test dans la table `message` --
 
@@ -278,3 +278,45 @@ WHERE private_message.created_at = (
 )
 AND (private_message.user_sender_id = 1 OR private_message.user_receiver_id = 1)
 ORDER BY private_message.created_at DESC;
+
+-- Story 14 : écrire la requête permettant d’afficher les messages d’une conversation entre deux utilisateurs --
+
+-- Requête pour afficher les messages entre l'utilisateur 1 et l'utilisateur 2 --
+
+SELECT 
+  sender.pseudo AS sender_pseudo,
+  receiver.pseudo AS receiver_pseudo,
+  private_message.created_at,
+  private_message.read_at,
+  private_message.is_read,
+
+  (SELECT COUNT(*) 
+  FROM score
+  WHERE user_id = 1) AS sender_played_games,
+
+  (SELECT COUNT(*) 
+  FROM score
+  WHERE user_id = 2) AS receiver_played_games,
+
+  (SELECT COUNT(score.game_id) AS most_played_game_count
+  FROM score  
+  JOIN game ON game.id = score.game_id
+  WHERE score.user_id = 1
+  GROUP BY game.id, game.name
+  ORDER BY most_played_game_count DESC
+  LIMIT 1) AS sender_most_played_game_count,
+
+  (SELECT COUNT(score.game_id) AS most_played_game_count 
+  FROM score  
+  JOIN game ON game.id = score.game_id
+  WHERE score.user_id = 2
+  GROUP BY game.id, game.name
+  ORDER BY most_played_game_count DESC
+  LIMIT 1) AS receiver_most_played_game_count
+
+FROM private_message
+JOIN user AS sender ON sender.id = private_message.user_sender_id
+JOIN user AS receiver ON receiver.id = private_message.user_receiver_id
+WHERE (private_message.user_sender_id = 1 AND private_message.user_receiver_id = 2)
+   OR (private_message.user_sender_id = 2 AND private_message.user_receiver_id = 1)
+ORDER BY private_message.created_at ASC;
