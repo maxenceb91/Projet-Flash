@@ -219,3 +219,38 @@ CREATE TABLE `private_message` (
 
 INSERT INTO `private_message` (`user_sender_id`, `user_receiver_id`, `message`)
 VALUES (@user_sender_id, @user_receiver_id, @message);
+
+-- Story 12 : ajouter des données de test et gérer la création, la modification et la suppression d’un message--
+
+INSERT INTO `private_message` (`user_sender_id`, `user_receiver_id`, `message`)
+VALUES (1, 2, "coucou"),
+       (2, 1, "salut"),
+       (3, 4, "hello"),
+       (4, 3, "hi"),
+       (5, 1, "yo"),
+       (1, 3, "quoi de neuf ?"),
+       (3, 1, "rien de spécial"), 
+       (2, 4, "ça va ?"),
+       (4, 2, "oui et toi ?"),
+       (5, 2, "on se voit ce soir ?"),
+       (2, 5, "avec plaisir"),
+       (3, 5, "on se fait une partie ?"),
+       (5, 3, "ok rdv en ligne"),
+       (4, 1, "tu as vu le nouveau jeu ?"),
+       (1, 4, "pas encore"),
+       (5, 4, "on joue ensemble ?"),
+       (4, 5, "avec joie"),
+       (2, 3, "tu as fini le niveau ?"),
+       (3, 2, "presque"),
+       (1, 2, "on se fait une pause ?");
+      
+-- Requête pour modifier un message privé --
+
+UPDATE `private_message`
+SET `message` = @new_message
+WHERE `id` = @message_id AND `user_sender_id` = @user_id;
+
+-- Requête pour supprimer un message privé --
+
+DELETE FROM `private_message`
+WHERE `id` = @message_id AND `user_sender_id` = @user_id;
