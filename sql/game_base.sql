@@ -115,3 +115,8 @@ INSERT INTO `message` (`game_id`, `user_id`, `message`) VALUES
 
 INSERT INTO `game` (`name`) 
 VALUES ('Power of memory');
+
+-- Story 3 : la réquête permettant d'ajouter un utilisateur avec son email, son mot de passe (hashé) et son pseudo -- 
+
+INSERT INTO `user` (`email`, `password`, `pseudo`) VALUES
+('@email','@password', '@pseudo');
