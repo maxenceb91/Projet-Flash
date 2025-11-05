@@ -141,3 +141,32 @@ SELECT *
 FROM `user`
 WHERE `email` = @email_provided
   AND `password` = @password_provided;
+
+-- Story 6 : La requête permettant de voir les scores des utilisateurs & les différentes requêtes de filtrages--
+
+-- La requête permettant de voir les scores des utilisateurs --
+
+SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
+JOIN `user` ON user.id = score.user_id
+JOIN `game` ON game.id = score.game_id
+ORDER BY game.name, difficulty DESC, score;
+
+-- Les différents filtrages --
+
+SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
+JOIN `user` ON user.id = score.user_id
+JOIN `game` ON game.id = score.game_id
+WHERE game.name = @game_name
+ORDER BY game.name, difficulty DESC, score;
+
+SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
+JOIN `user` ON user.id = score.user_id
+JOIN `game` ON game.id = score.game_id
+WHERE score.difficulty = @difficulty_level
+ORDER BY game.name, difficulty DESC, score;
+
+SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
+JOIN `user` ON user.id = score.user_id
+JOIN `game` ON game.id = score.game_id
+WHERE game.name = @game_name AND score.difficulty = @difficulty_level
+ORDER BY game.name, difficulty DESC, score;
