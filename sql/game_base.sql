@@ -188,3 +188,12 @@ VALUES (@user_id, @game_id, @difficulty, @score);
 
 INSERT INTO `message` (`game_id`, `user_id`, `message`)
 VALUES (@game_id, @user_id, @message);
+
+-- Story 10 : la requête permettant d’afficher la discussion du chat général --
+
+SELECT message.message, user.pseudo, message.created_at,
+CASE WHEN user_id = @online_user_id THEN TRUE ELSE FALSE END AS isSender 
+FROM `message`
+JOIN `user` ON user.id = message.user_id
+WHERE message.created_at >= NOW() - INTERVAL 24 HOUR
+ORDER BY created_at ASC
