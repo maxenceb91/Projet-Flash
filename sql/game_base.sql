@@ -134,3 +134,10 @@ WHERE `id` = @id_user;
 UPDATE  `user`
 SET `email` = 'newemail'
 WHERE `id` = @id_user AND `password` = @password_provided;
+
+-- Story 5 : la requête permettant de s’identifier sur le site --
+
+SELECT *
+FROM `user`
+WHERE `email` = @email_provided
+  AND `password` = @password_provided;
