@@ -178,3 +178,8 @@ JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
 WHERE user.pseudo LIKE `%@char_search%`
 ORDER BY game.name, difficulty DESC, score;
+
+-- Story 8 : la requête permettant d’enregistrer le score d’un joueur qui a terminé sa partie --
+
+INSERT INTO `score` (`user_id`, `game_id`, `difficulty`, `score`)
+VALUES (@user_id, @game_id, @difficulty, @score);
