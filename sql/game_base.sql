@@ -170,3 +170,11 @@ JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
 WHERE game.name = @game_name AND score.difficulty = @difficulty_level
 ORDER BY game.name, difficulty DESC, score;
+
+-- Story 7 : La requête permettant de rechercher des scores à partir du pseudo d’un utilisateur --
+
+SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
+JOIN `user` ON user.id = score.user_id
+JOIN `game` ON game.id = score.game_id
+WHERE user.pseudo LIKE `%@char_search%`
+ORDER BY game.name, difficulty DESC, score;
