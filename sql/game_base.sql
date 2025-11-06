@@ -8,9 +8,9 @@ USE `game_base`;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) DEFAULT NULL,
+  `email` varchar(100) UNIQUE DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
-  `pseudo` varchar(100) DEFAULT NULL,
+  `pseudo` varchar(100) UNIQUE DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -176,7 +176,7 @@ ORDER BY game.name, difficulty DESC, score;
 SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
-WHERE user.pseudo LIKE `%@char_search%`
+WHERE user.pseudo LIKE '%@char_search%'
 ORDER BY game.name, difficulty DESC, score;
 
 -- Story 8 : la requête permettant d’enregistrer le score d’un joueur qui a terminé sa partie --
@@ -196,7 +196,7 @@ CASE WHEN user_id = @online_user_id THEN TRUE ELSE FALSE END AS isSender
 FROM `message`
 JOIN `user` ON user.id = message.user_id
 WHERE message.created_at >= NOW() - INTERVAL 24 HOUR
-ORDER BY created_at ASC
+ORDER BY created_at ASC;
 
 -- Story 11 :  créer une messagerie privée sur mon site internet --
 
@@ -286,6 +286,7 @@ ORDER BY private_message.created_at DESC;
 SELECT 
   sender.pseudo AS sender_pseudo,
   receiver.pseudo AS receiver_pseudo,
+  private_message.message,
   private_message.created_at,
   private_message.read_at,
   private_message.is_read,
