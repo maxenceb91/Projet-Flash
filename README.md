@@ -17,7 +17,7 @@
 
 ## Description :
 
-Ce dépôt contient le "**Projet Flash**" réalisé dans le cadre de la formation à la [**Coding Factory**](https://codingfactory.fr/) by [**Esiee-it**](https://www.esiee-it.fr/fr). L'objectif est de concevoir un site de mini-jeu, avec les technologies de base du développement web : **HTML, CSS, JavaScript, PHP, MySQL**.
+Ce dépôt contient le "**Projet Flash**" réalisé dans le cadre de la formation à la [**Coding Factory**](https://codingfactory.fr/) by [**ESIEE-IT**](https://www.esiee-it.fr/fr). L'objectif est de concevoir un site de mini-jeu, avec les technologies de base du développement web : **HTML, CSS, JavaScript, PHP, MySQL**.
 
 
 ## Étape actuelle du développement :
