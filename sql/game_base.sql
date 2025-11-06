@@ -321,7 +321,7 @@ WHERE (private_message.user_sender_id = 1 AND private_message.user_receiver_id =
    OR (private_message.user_sender_id = 2 AND private_message.user_receiver_id = 1)
 ORDER BY private_message.created_at ASC;
 
--- Story 15 : écrire la requête SQL qui permettra d’afficher toutes les stats de tous les joueur en fonction d’une année --
+-- Story 15 : écrire la requête qui permettra d’afficher toutes les stats de tous les joueur en fonction d’une année --
 
 -- Requête pour connaître le nombre total de parties jouées pour un mois quelconque de l'année 2025 --
 
@@ -432,6 +432,81 @@ SELECT
           GROUP BY game.id, game.name
           ORDER BY COUNT(score.id) DESC
           LIMIT 1) AS "Jeu le plus joué"
+FROM (
+    SELECT 1 AS month_number
+    UNION ALL SELECT 2
+    UNION ALL SELECT 3
+    UNION ALL SELECT 4
+    UNION ALL SELECT 5
+    UNION ALL SELECT 6
+    UNION ALL SELECT 7
+    UNION ALL SELECT 8
+    UNION ALL SELECT 9
+    UNION ALL SELECT 10
+    UNION ALL SELECT 11
+    UNION ALL SELECT 12
+) AS m;
+
+-- Story 16 : écrire la requête SQL qui permettra d’afficher les stats d’un seul joueur --
+
+-- Requête pour afficher le total de parties jouées sur un mois quelconque de l'année 2025 pour un utilisateur donné --
+
+SELECT
+    COUNT(*) AS total_games_played
+FROM score
+WHERE YEAR(created_at) = 2025 
+  AND MONTH(created_at) = @month
+  AND user_id = @user_id;
+
+-- Requête pour afficher le jeu le plus joué sur un mois quelconque de l'année 2025 pour un utilisateur donné --
+
+SELECT 
+    game.name
+FROM game
+JOIN score ON score.game_id = game.id
+WHERE YEAR(score.created_at) = 2025 
+  AND MONTH(score.created_at) = @month
+  AND score.user_id = @user_id
+GROUP BY game.id, game.name
+ORDER BY COUNT(score.id) DESC
+LIMIT 1;
+
+-- Requête pour afficher le score moyen sur un mois quelconque de l'année 2025 pour un utilisateur donné --
+
+SELECT
+    ROUND(AVG(score.score)) AS average_score
+FROM score
+WHERE YEAR(score.created_at) = 2025 
+  AND MONTH(score.created_at) = @month
+  AND score.user_id = @user_id;
+
+-- Requête finale --
+
+SELECT 
+        2025 AS "Année",
+        m.month_number AS "Mois",
+
+        (SELECT COUNT(*) 
+          FROM score 
+          WHERE YEAR(created_at) = 2025 
+            AND MONTH(created_at) = m.month_number
+            AND user_id = @user_id) AS "Total Parties",
+        
+        (SELECT game.name
+          FROM game
+          JOIN score ON score.game_id = game.id
+          WHERE YEAR(score.created_at) = 2025 
+            AND MONTH(score.created_at) = m.month_number
+            AND score.user_id = @user_id
+          GROUP BY game.id, game.name
+          ORDER BY COUNT(score.id) DESC
+          LIMIT 1) AS "Jeu le plus joué",
+
+        (SELECT ROUND(AVG(score.score)) AS average_score
+          FROM score
+          WHERE YEAR(score.created_at) = 2025 
+            AND MONTH(score.created_at) = m.month_number
+            AND score.user_id = @user_id) AS "Score Moyen"
 FROM (
     SELECT 1 AS month_number
     UNION ALL SELECT 2
