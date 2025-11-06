@@ -320,3 +320,129 @@ JOIN user AS receiver ON receiver.id = private_message.user_receiver_id
 WHERE (private_message.user_sender_id = 1 AND private_message.user_receiver_id = 2)
    OR (private_message.user_sender_id = 2 AND private_message.user_receiver_id = 1)
 ORDER BY private_message.created_at ASC;
+
+-- Story 15 : écrire la requête SQL qui permettra d’afficher toutes les stats de tous les joueur en fonction d’une année --
+
+-- Requête pour connaître le nombre total de parties jouées pour un mois quelconque de l'année 2025 --
+
+SELECT COUNT(*) AS total_games_played FROM score 
+WHERE YEAR(created_at) = 2025 AND MONTH(created_at) = @month;
+
+-- Requête pour connaître le jeu le plus joueés pour un mois quelconque de l'année 2025 --
+
+SELECT 
+    game.name
+FROM game
+JOIN score ON score.game_id = game.id
+WHERE YEAR(score.created_at) = 2025 
+  AND MONTH(score.created_at) = @month
+GROUP BY game.id, game.name
+ORDER BY COUNT(score.id) DESC
+LIMIT 1;
+
+-- Requête Top @number --
+
+SELECT user.pseudo
+FROM score
+JOIN user ON user.id = score.user_id
+WHERE YEAR(score.created_at) = 2025
+  AND MONTH(score.created_at) = @month
+GROUP BY user.id, user.pseudo
+ORDER BY SUM(score.score) DESC
+LIMIT 1 OFFSET @number - 1;
+
+-- Requête Top 3 --
+
+SELECT
+    (
+        SELECT user.pseudo
+        FROM score
+        JOIN user ON user.id = score.user_id
+        WHERE YEAR(score.created_at) = 2025
+          AND MONTH(score.created_at) = @month
+        GROUP BY user.id, user.pseudo
+        ORDER BY SUM(score.score) DESC
+        LIMIT 1 OFFSET 0
+    ) AS "Top 1",
+    
+    (
+        SELECT user.pseudo
+        FROM score
+        JOIN user ON user.id = score.user_id
+        WHERE YEAR(score.created_at) = 2025
+          AND MONTH(score.created_at) = @month
+        GROUP BY user.id, user.pseudo
+        ORDER BY SUM(score.score) DESC
+        LIMIT 1 OFFSET 1
+    ) AS "Top 2",
+    
+    (
+        SELECT user.pseudo
+        FROM score
+        JOIN user ON user.id = score.user_id
+        WHERE YEAR(score.created_at) = 2025
+          AND MONTH(score.created_at) = @month
+        GROUP BY user.id, user.pseudo
+        ORDER BY SUM(score.score) DESC
+        LIMIT 1 OFFSET 2
+    ) AS "Top 3";
+
+-- La requête finale --
+
+SELECT 
+        2025 AS "Année",
+        m.month_number AS "Mois",
+
+        (SELECT user.pseudo
+          FROM score
+          JOIN user ON user.id = score.user_id
+          WHERE YEAR(score.created_at) = 2025
+            AND MONTH(score.created_at) = m.month_number
+          GROUP BY user.id, user.pseudo
+          ORDER BY SUM(score.score) DESC
+          LIMIT 1 OFFSET 0) AS "Top 1",
+        
+        (SELECT user.pseudo
+          FROM score
+          JOIN user ON user.id = score.user_id
+          WHERE YEAR(score.created_at) = 2025
+            AND MONTH(score.created_at) = m.month_number
+          GROUP BY user.id, user.pseudo
+          ORDER BY SUM(score.score) DESC
+          LIMIT 1 OFFSET 1) AS "Top 2",
+        
+        (SELECT user.pseudo
+          FROM score
+          JOIN user ON user.id = score.user_id
+          WHERE YEAR(score.created_at) = 2025
+            AND MONTH(score.created_at) = m.month_number
+          GROUP BY user.id, user.pseudo
+          ORDER BY SUM(score.score) DESC
+          LIMIT 1 OFFSET 2) AS "Top 3",
+
+        (SELECT COUNT(*) 
+          FROM score 
+          WHERE YEAR(created_at) = 2025 AND MONTH(created_at) = m.month_number) AS "Total Parties",
+        
+        (SELECT game.name
+          FROM game
+          JOIN score ON score.game_id = game.id
+          WHERE YEAR(score.created_at) = 2025 
+            AND MONTH(score.created_at) = m.month_number
+          GROUP BY game.id, game.name
+          ORDER BY COUNT(score.id) DESC
+          LIMIT 1) AS "Jeu le plus joué"
+FROM (
+    SELECT 1 AS month_number
+    UNION ALL SELECT 2
+    UNION ALL SELECT 3
+    UNION ALL SELECT 4
+    UNION ALL SELECT 5
+    UNION ALL SELECT 6
+    UNION ALL SELECT 7
+    UNION ALL SELECT 8
+    UNION ALL SELECT 9
+    UNION ALL SELECT 10
+    UNION ALL SELECT 11
+    UNION ALL SELECT 12
+) AS m;
