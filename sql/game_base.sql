@@ -228,6 +228,7 @@ JOIN `user` ON user.id = message.user_id
 WHERE message.created_at >= NOW() - INTERVAL 24 HOUR
 ORDER BY created_at ASC;
 
+
 -- Story 11 :  créer une messagerie privée sur mon site internet --
 
 -- Création de la table private message --
@@ -319,6 +320,7 @@ WHERE private_message.created_at = (
 )
 AND (private_message.user_sender_id = 1 OR private_message.user_receiver_id = 1)
 ORDER BY private_message.created_at DESC;
+
 
 -- Story 14 : écrire la requête permettant d’afficher les messages d’une conversation entre deux utilisateurs --
 
