@@ -125,17 +125,27 @@ INSERT INTO `user` (`email`, `password`, `pseudo`) VALUES
 
 -- Requête pour modifier le mot de passe --
 
+SET @id_user = 1;
+SET @new_password = 'new_hashed_password';
+
 UPDATE `user`
 SET `password` = @new_password
 WHERE `id` = @id_user;
 
 -- Requête pour modifier l'adresse email--
 
+SET @id_user = 1;
+SET @password_provided = 'new_hashed_password';
+SET @email_provided = 'newemail';
+
 UPDATE  `user`
 SET `email` = 'newemail'
 WHERE `id` = @id_user AND `password` = @password_provided;
 
 -- Story 5 : la requête permettant de s’identifier sur le site --
+
+SET @email_provided = 'john.doe@gmail.com';
+SET @password_provided = 'test';
 
 SELECT *
 FROM `user`
@@ -153,17 +163,24 @@ ORDER BY game.name, difficulty DESC, score;
 
 -- Les différents filtrages --
 
+SET @game_name = 'Power of memory';
+
 SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
 WHERE game.name = @game_name
 ORDER BY game.name, difficulty DESC, score;
 
+set @difficulty_level = '2';
+
 SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
 WHERE score.difficulty = @difficulty_level
 ORDER BY game.name, difficulty DESC, score;
+
+SET @game_name = 'Power of memory';
+SET @difficulty_level = '2';
 
 SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
 JOIN `user` ON user.id = score.user_id
@@ -173,6 +190,8 @@ ORDER BY game.name, difficulty DESC, score;
 
 -- Story 7 : La requête permettant de rechercher des scores à partir du pseudo d’un utilisateur --
 
+SET @char_search = 'o';
+
 SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
@@ -181,15 +200,26 @@ ORDER BY game.name, difficulty DESC, score;
 
 -- Story 8 : la requête permettant d’enregistrer le score d’un joueur qui a terminé sa partie --
 
+SET @user_id = 1;
+SET @game_id = 1;
+SET @difficulty = '2';
+SET @score = 1580;
+
 INSERT INTO `score` (`user_id`, `game_id`, `difficulty`, `score`)
 VALUES (@user_id, @game_id, @difficulty, @score);
 
 -- Story 9 : la requête permettant d’enregistrer un message sur le chat d’une partie --
 
+SET @game_id = 1;
+SET @user_id = 1;
+SET @message = 'GG WP';
+
 INSERT INTO `message` (`game_id`, `user_id`, `message`)
 VALUES (@game_id, @user_id, @message);
 
 -- Story 10 : la requête permettant d’afficher la discussion du chat général --
+
+SET @online_user_id = 1;
 
 SELECT message.message, user.pseudo, message.created_at,
 CASE WHEN user_id = @online_user_id THEN TRUE ELSE FALSE END AS isSender 
@@ -216,6 +246,10 @@ CREATE TABLE `private_message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 -- Requête pour envoyer un message privé --
+
+SET @user_sender_id = 1;
+SET @user_receiver_id = 2;
+SET @message = 'Salut, comment ça va ?';
 
 INSERT INTO `private_message` (`user_sender_id`, `user_receiver_id`, `message`)
 VALUES (@user_sender_id, @user_receiver_id, @message);
@@ -246,11 +280,18 @@ VALUES (1, 2, "gg bg"),
       
 -- Requête pour modifier un message privé --
 
+SET @message_id = 1;
+SET @user_id = 1;
+SET @new_message = 'Salut, ça va bien et toi ?';
+
 UPDATE `private_message`
 SET `message` = @new_message
 WHERE `id` = @message_id AND `user_sender_id` = @user_id;
 
 -- Requête pour supprimer un message privé --
+
+SET @message_id = 1;
+SET @user_id = 1;
 
 DELETE FROM `private_message`
 WHERE `id` = @message_id AND `user_sender_id` = @user_id;
@@ -326,10 +367,14 @@ ORDER BY private_message.created_at ASC;
 
 -- Requête pour connaître le nombre total de parties jouées pour un mois quelconque de l'année 2025 --
 
+SET @month = 11;
+
 SELECT COUNT(*) AS total_games_played FROM score 
 WHERE YEAR(created_at) = 2025 AND MONTH(created_at) = @month;
 
 -- Requête pour connaître le jeu le plus joueés pour un mois quelconque de l'année 2025 --
+
+SET @month = 11;
 
 SELECT 
     game.name
@@ -343,6 +388,8 @@ LIMIT 1;
 
 -- Requête Top @number --
 
+SET @month = 11;
+
 SELECT user.pseudo
 FROM score
 JOIN user ON user.id = score.user_id
@@ -350,9 +397,11 @@ WHERE YEAR(score.created_at) = 2025
   AND MONTH(score.created_at) = @month
 GROUP BY user.id, user.pseudo
 ORDER BY SUM(score.score) DESC
-LIMIT 1 OFFSET @number - 1;
+LIMIT 1 OFFSET 0;
 
 -- Requête Top 3 --
+
+SET @month = 11;
 
 SELECT
     (
@@ -452,6 +501,9 @@ FROM (
 
 -- Requête pour afficher le total de parties jouées sur un mois quelconque de l'année 2025 pour un utilisateur donné --
 
+SET @month = 11;
+SET @user_id = 1;
+
 SELECT
     COUNT(*) AS total_games_played
 FROM score
@@ -460,6 +512,9 @@ WHERE YEAR(created_at) = 2025
   AND user_id = @user_id;
 
 -- Requête pour afficher le jeu le plus joué sur un mois quelconque de l'année 2025 pour un utilisateur donné --
+
+SET @month = 11;
+SET @user_id = 1;
 
 SELECT 
     game.name
@@ -474,6 +529,9 @@ LIMIT 1;
 
 -- Requête pour afficher le score moyen sur un mois quelconque de l'année 2025 pour un utilisateur donné --
 
+SET @month = 11;
+SET @user_id = 1;
+
 SELECT
     ROUND(AVG(score.score)) AS average_score
 FROM score
@@ -482,6 +540,8 @@ WHERE YEAR(score.created_at) = 2025
   AND score.user_id = @user_id;
 
 -- Requête finale --
+
+SET @user_id = 1;
 
 SELECT 
         2025 AS "Année",
