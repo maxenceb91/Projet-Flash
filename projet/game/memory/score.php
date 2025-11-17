@@ -3,37 +3,17 @@
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score</title>
-    <link rel="stylesheet" href="../assets/style/score.css">
-    <link rel="stylesheet" href="../assets/style/header.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
-    <link rel="stylesheet" href="../assets/style/footer.css">
+ <?php
+    include "../../partials/head.php"
+    ?>
+    <link rel="stylesheet" href="/Projet-flash/assets/style/score.css">
 </head>
 
 <body>
 
-    <!--header-->
-    <header>
-        <a href="../index.html">
-            <img src="../assets/img/logo.png" class="logo" alt="logo">
-        </a>
-        <nav>
-            <a href="../index.html">Accueil</a>
-            <a href="../views/score.html">Scores</a>
-            <a href="../views/profil.html">Profil</a>
-            <a class="contact-btn" href="../views/contact.html">Nous contacter</a>
-        </nav>
-
-         <div class="burger-menu">
-            <div class="burger-container">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </header>
+    <?php
+    include "../../partials/header.php"
+    ?>
 
     <div class="container">
 
@@ -60,7 +40,7 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td><img src="../assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
+                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
                         <td>John Doe</td>
                         <td>Difficile</td>
                         <td>1m36</td>
@@ -68,7 +48,7 @@
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td><img src="../assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
+                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
                         <td>Joueur 2</td>
                         <td>Difficile</td>
                         <td>1m39</td>
@@ -76,7 +56,7 @@
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td><img src="../assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
+                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
                         <td>Joueur 3</td>
                         <td>Difficile</td>
                         <td>1m40</td>
@@ -84,7 +64,7 @@
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td><img src="../assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
+                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
                         <td>Joueur 4</td>
                         <td>Difficile</td>
                         <td>1m50</td>
@@ -92,7 +72,7 @@
                     </tr>
                     <tr>
                         <td>5</td>
-                        <td><img src="../assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
+                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
                         <td>Joueur 5</td>
                         <td>Difficile</td>
                         <td>2m01</td>
@@ -100,7 +80,7 @@
                     </tr>
                     <tr>
                         <td>6</td>
-                        <td><img src="../assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
+                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
                         <td>Joueur 6</td>
                         <td>Difficile</td>
                         <td>2m34</td>
@@ -121,7 +101,7 @@
 
             </div>
 
-            <img src="../assets/img/aaa.png">
+            <img src="/Projet-flash/assets/img/aaa.png">
         </section>
     </div>
 

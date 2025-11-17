@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game base</title>
-    <link rel="stylesheet" href="./assets/style/base.css">
     <link rel="stylesheet" href="./assets/style/index.css">
     <link rel="stylesheet" href="./assets/style/header.css">
     <link rel="stylesheet" href="./assets/style/footer.css">
@@ -15,27 +14,10 @@
 </head>
 
 <body>
-
     <!--Header-->
-    <header>
-        <a href="#">
-            <img src="./assets/img/logo.png" class="logo" alt="logo">
-        </a>
-        <nav>
-            <a href="#">Accueil</a>
-            <a href="./views/score.html">Scores</a>
-            <a href="./views/profil.html">Profil</a>
-            <a class="contact-btn" href="./views/contact.html">Nous contacter</a>
-        </nav>
-
-        <div class="burger-menu">
-            <div class="burger-container">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </header>
+     <?php
+    include "./projet/partials/header.php"
+    ?>
     <div class="container">
 
         <!--Hero section-->
@@ -44,7 +26,7 @@
             <h1>Des jeux rapides et addictifs</h1>
             <p>GameBase vous propose des mini-jeux amusants et rapides pour défier votre mémoire, votre vitesse et vos réflexes. Défiez vos amis, améliorez vos scores et amusez-vous en quelques minutes seulement.</p>
 
-            <a href="./views/login.html">Commencer !</a>
+            <a href="./views/login.php">Commencer !</a>
             <img src="./assets/img/Banner-Image.png">
         </section>
 
@@ -159,57 +141,9 @@
     </div>
 
     <!--Footer-->
-    <footer>
-        <div class="footer-top">
-            <div>
-                <h2>GameBase</h2>
-                <p>GameBase est votre plateforme de mini-jeux en ligne rapides et amusants. Défiez vos amis, battez des records et amusez-vous à tout moment depuis votre navigateur.</p>
-            </div>
-            <div>
-                <h3>Menu</h3>
-                <nav>
-                    <ul>
-                        <li>
-                            <a>Accueil</a>
-                        </li>
-
-                        <li>
-                            <a>Scores</a>
-                        </li>
-
-                        <li>
-                            <a>Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div>
-
-                <h3>Contactez-nous</h3>
-                <p>Une question, une suggestion ou un bug à signaler ? Notre équipe est disponible pour vous répondre rapidement.</p>
-
-                <p class="mail">contact@gamebase.com</p>
-            </div>
-            <div class="social">
-                <div>
-
-                    <i class="ri-facebook-line"></i>
-
-                    <i class="ri-instagram-line"></i>
-
-                    <i class="ri-twitter-line"></i>
-
-                    <i class="ri-linkedin-line"></i>
-                </div>
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="footer-bottom">
-            <p>Copyright ® 2025 All rights Reserved - GameBase</p>
-        </div>
-    </footer>
+     <?php
+    include "./projet/partials/footer.php"
+    ?>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

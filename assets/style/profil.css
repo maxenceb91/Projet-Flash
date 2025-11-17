@@ -1,3 +1,9 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #070320;
+    color: #fff;
+}
+
 .banner {
     background-color: #d80027;
     height: 350px;
@@ -54,7 +60,8 @@
         margin-bottom: 1rem;
     }
 
-    input, textarea {
+    input,
+    textarea {
         padding: 15px;
         background-color: transparent;
         border: 1px solid #333;
@@ -67,7 +74,7 @@
         transition: all .3s;
     }
 
-    input:focus{
+    input:focus {
         border-color: #d80027;
     }
 }
@@ -84,19 +91,19 @@ form button {
     border: none;
 }
 
-@media (max-width: 768px){
-    .profil{
+@media (max-width: 768px) {
+    .profil {
         max-width: 100%;
     }
 
-    .banner-content img{
+    .banner-content img {
         width: 130px;
     }
 
-    .banner-content{
+    .banner-content {
         gap: 1rem;
 
-        small{
+        small {
             display: none;
         }
 

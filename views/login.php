@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../assets/style/auth.css">
+<?php 
+include_once "../projet/partials/head.php"
+?>
+<link rel="stylesheet" href="../assets/style/auth.css">
 </head>
-
 <body>
 
     <div class="global-container">
@@ -37,7 +35,7 @@
                 <a class="login-with-google"> <img src="../assets/img/google.png">Se connecter avec Google</a>
 
                 <div class="no-account">
-                    <p>Pas de compte ? </p> <a href="./register.html">Je m'inscris</a>
+                    <p>Pas de compte ? </p> <a href="./register.php">Je m'inscris</a>
                 </div>
             </div>
         </div>

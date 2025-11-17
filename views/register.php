@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <?php
+    include_once "../projet/partials/head.php"
+    ?>
     <link rel="stylesheet" href="../assets/style/auth.css">
 </head>
 
@@ -14,9 +13,9 @@
     <div class="global-container">
         <div class="left">
             <div class="left-container">
-                <h1>Bienvenu chez nous !  👋</h1>
+                <h1>Bienvenu chez nous ! 👋</h1>
                 <p>Créez un compte pour sauvegarder vos scores, suivre vos progrès et participer aux classements.</p>
-                    
+
                 <form method="post">
                     <label>Email</label>
                     <input type="email" placeholder="Example@email.com">
@@ -24,7 +23,7 @@
                     <input type="password" placeholder="8 caractères minimum">
                     <label>Confirmer le mot de passe</label>
                     <input type="password" placeholder="8 caractères minimum">
-                
+
                     <button type="submit" class="login-btn">Inscription</button>
                 </form>
 
