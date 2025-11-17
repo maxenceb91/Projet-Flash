@@ -5,7 +5,25 @@ body {
     color: #fff;
 }
 
+.settings{
+  display: flex;
+  gap: 5rem;
+  margin-top: 5rem;
+  label, input, select{
+    display: block;
+  }
 
+  input, select{
+    width: 200px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #fff;
+    cursor: pointer;
+    margin-top: .4rem;
+  }
+}
 .hero{
     text-align: center;
     display: flex;

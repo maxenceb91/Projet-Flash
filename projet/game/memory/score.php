@@ -1,9 +1,83 @@
+<?php
+require "../../../projet/utils/database.php";
+
+
+$pdo = connectToDbAndGetPdo();
+
+function getScores()
+{
+    global $pdo;
+    $request = $pdo->prepare('
+        SELECT 
+            game.name AS game_name, 
+            user.pseudo AS user_pseudo, 
+            score.difficulty, 
+            score.score, 
+            score.created_at 
+        FROM `score`
+        JOIN `user` ON user.id = score.user_id
+        JOIN `game` ON game.id = score.game_id
+        ORDER BY game.name, difficulty DESC, score DESC;
+    ');
+    $request->execute();
+    return $request->fetchAll();
+}
+
+function displayDifficulty($difficulty)
+{
+    switch ($difficulty):
+        case 1:
+            return "Facile";
+        case 2:
+            return "Moyen";
+        case 3:
+            return "Difficile";
+        default:
+            return "Inconnu";
+    endswitch;
+}
+
+function getQuery()
+{
+    if (isset($_GET["q"])){
+        return $_GET["q"];
+    }else{
+        return "";
+    }
+}
+
+function getSearchScore($char)
+{
+    if ($char == ""){
+        return getScores();
+    }
+
+    global $pdo;
+    $request = $pdo->prepare('
+        SELECT 
+            game.name AS game_name, 
+            user.pseudo AS user_pseudo, 
+            score.difficulty, 
+            score.score, 
+            score.created_at 
+        FROM score
+        JOIN user ON user.id = score.user_id
+        JOIN game ON game.id = score.game_id
+        WHERE user.pseudo LIKE :char
+        ORDER BY game.name, score.difficulty DESC, score.score DESC
+    ');
+    
+    $request->execute(['char' => "%$char%"]);
+    
+    return $request->fetchAll();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
-
 <head>
- <?php
+    <?php
     include "../../partials/head.php"
     ?>
     <link rel="stylesheet" href="/Projet-flash/assets/style/score.css">
@@ -12,18 +86,34 @@
 <body>
 
     <?php
+    $page = 'scores';
     include "../../partials/header.php"
     ?>
 
     <div class="container">
 
         <!--hero section -->
-        
+
         <section class="hero">
             <h1>Classement</h1>
             <p>Consultez les meilleurs temps et les performances des joueurs sur nos mini-jeux. Défiez vos amis ou tentez de grimper dans le top chaque jour.</p>
         </section>
 
+        <div class="settings">
+            <form class="search-bar" method="get">
+                <label for="search-bar">Rechercher</label>
+                <input id="search-bar"value="<?= htmlspecialchars(getQuery()) ?>" name="q" type="text">
+            </form>
+
+            <div>
+            <label for="difficulty">Difficulté</label>
+            <select id="difficulty" name="difficulty">
+                <option value="1">Facile</option>
+                <option value="2">Moyen</option>
+                <option value="3">Difficile</option>
+            </select>
+        </div>
+    </div>
 
         <section class="scoreboard">
             <table>
@@ -38,54 +128,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
-                        <td>John Doe</td>
-                        <td>Difficile</td>
-                        <td>1m36</td>
-                        <td>29/09/25</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
-                        <td>Joueur 2</td>
-                        <td>Difficile</td>
-                        <td>1m39</td>
-                        <td>29/09/25</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
-                        <td>Joueur 3</td>
-                        <td>Difficile</td>
-                        <td>1m40</td>
-                        <td>29/09/25</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
-                        <td>Joueur 4</td>
-                        <td>Difficile</td>
-                        <td>1m50</td>
-                        <td>29/09/25</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
-                        <td>Joueur 5</td>
-                        <td>Difficile</td>
-                        <td>2m01</td>
-                        <td>29/09/25</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td><img src="/Projet-flash/assets/img/game.png" alt="jeu"><span>Power Of Memory</span></td>
-                        <td>Joueur 6</td>
-                        <td>Difficile</td>
-                        <td>2m34</td>
-                        <td>29/09/25</td>
-                    </tr>
+                    <?php
+                    $scores = getSearchScore(getQuery());
+                    $i = 0;
+                    foreach ($scores as $score) {
+                        $i++;
+                        echo '<tr>' .
+                            '<td>' . $i . '</td>' .
+                            '<td>' . '<img src="/Projet-flash/assets/img/game.png" alt="jeu">'
+                            . '<span>' . $score['game_name'] . '</span>' . '</td>' .
+                            '<td>' . $score['user_pseudo'] . '</td>' .
+                            '<td>' . displayDifficulty($score['difficulty']) . '</td>' .
+                            '<td>' . $score['score'] . '</td>' .
+                            '<td>' . $score['created_at'] . '</td>' .
+                            '</tr>';
+                    }
+                    ?>
                 </tbody>
             </table>
         </section>

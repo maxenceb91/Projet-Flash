@@ -1,3 +1,44 @@
+<?php
+require "./projet/utils/database.php";
+
+
+$pdo = connectToDbAndGetPdo();
+
+function getPlayedGames()
+{
+    global $pdo;
+    $request = $pdo->prepare('SELECT COUNT(*) as total FROM score');
+    $request->execute();
+    $result = $request->fetch();
+    return $result['total'];
+}
+
+function getConnectedUsers()
+{
+    return 0;
+}
+
+function getRecordTime()
+{
+    return 0;
+}
+
+function getRegisteredUsers()
+{
+    global $pdo;
+    $request = $pdo->prepare('SELECT COUNT(*) as total FROM user');
+    $request->execute();
+    $result = $request->fetch();
+    return $result['total'];
+}
+
+function getBeatenScores()
+{
+    return 0;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +56,8 @@
 
 <body>
     <!--Header-->
-     <?php
+    <?php
+    $page = 'accueil';
     include "./projet/partials/header.php"
     ?>
     <div class="container">
@@ -72,29 +114,29 @@
 
             <div class="flex-3">
                 <span class="stat stat-blue">
-                    <span>310</span>
+                    <span><?php echo getPlayedGames() ?></span>
                     <small>Parties Jouées</small>
                 </span>
 
                 <span class="stat stat-white">
-                    <span>1020</span>
+                    <span><?php echo getConnectedUsers() ?></span>
                     <small>Joueurs Connectés</small>
                 </span>
 
                 <span class="stat stat-orange">
-                    <span>10s</span>
+                    <span><?php echo getRecordTime() ?></span>
                     <small>Temps Record</small>
                 </span>
             </div>
 
             <div class="flex-2">
                 <span class="stat stat-red">
-                    <span>9300</span>
+                    <span><?php echo getRegisteredUsers() ?></span>
                     <small>Joueurs Inscrits</small>
                 </span>
 
                 <span class="stat stat-orange">
-                    <span>2</span>
+                    <span><?php echo getBeatenScores() ?></span>
                     <small>Records battus aujourd’hui</small>
                 </span>
             </div>
@@ -141,7 +183,7 @@
     </div>
 
     <!--Footer-->
-     <?php
+    <?php
     include "./projet/partials/footer.php"
     ?>
 

@@ -1,3 +1,18 @@
+<?php
+
+require "../../../projet/utils/database.php";
+
+function isNotUsedPseudo($pseudo){
+    
+}
+
+function isValidPseudo($pseudo){
+    return strlen($pseudo) > 4 && isNotUsedPseudo($pseudo);
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 

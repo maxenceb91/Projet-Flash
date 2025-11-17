@@ -9,6 +9,7 @@ include_once "../projet/partials/head.php"
 </head>
 <body>
     <?php
+    $page = 'profil';
     include "../projet/partials/header.php"
     ?>
 
