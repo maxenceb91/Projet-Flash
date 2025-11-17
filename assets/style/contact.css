@@ -1,17 +1,3 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #070320;
-    color: #fff;
-    overflow-x: hidden;
-}
-
 .first-container {
     text-align: center;
     margin-top: 100px;

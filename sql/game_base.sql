@@ -82,6 +82,9 @@ INSERT INTO `score` (`user_id`, `game_id`, `difficulty`, `score`) VALUES
 (4, 1, '2', 1980),
 (5, 1, '1', 710);
 
+INSERT INTO `score` (`user_id`, `game_id`, `difficulty`, `score`) VALUES
+(1, 1, '2', 3000);
+
 -- Insertion des messages de test dans la table `message` --
 
 INSERT INTO `message` (`game_id`, `user_id`, `message`) VALUES
@@ -159,7 +162,7 @@ WHERE `email` = @email_provided
 SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at FROM `score`
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
-ORDER BY game.name, difficulty DESC, score;
+ORDER BY game.name, difficulty DESC, score DESC;
 
 -- Les différents filtrages --
 
@@ -169,7 +172,7 @@ SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at F
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
 WHERE game.name = @game_name
-ORDER BY game.name, difficulty DESC, score;
+ORDER BY game.name, difficulty DESC, score DESC;
 
 set @difficulty_level = '2';
 
@@ -177,7 +180,7 @@ SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at F
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
 WHERE score.difficulty = @difficulty_level
-ORDER BY game.name, difficulty DESC, score;
+ORDER BY game.name, difficulty DESC, score DESC;
 
 SET @game_name = 'Power of memory';
 SET @difficulty_level = '2';
@@ -186,7 +189,7 @@ SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at F
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
 WHERE game.name = @game_name AND score.difficulty = @difficulty_level
-ORDER BY game.name, difficulty DESC, score;
+ORDER BY game.name, difficulty DESC, score DESC;
 
 -- Story 7 : La requête permettant de rechercher des scores à partir du pseudo d’un utilisateur --
 
@@ -196,7 +199,7 @@ SELECT game.name, user.pseudo, score.difficulty, score.score, score.created_at F
 JOIN `user` ON user.id = score.user_id
 JOIN `game` ON game.id = score.game_id
 WHERE user.pseudo LIKE '%@char_search%'
-ORDER BY game.name, difficulty DESC, score;
+ORDER BY game.name, difficulty DESC, score DESC;
 
 -- Story 8 : la requête permettant d’enregistrer le score d’un joueur qui a terminé sa partie --
 
