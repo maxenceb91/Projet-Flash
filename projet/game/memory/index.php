@@ -1,3 +1,5 @@
+<?php require "../../utils/userConexion.php"; ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,11 +16,9 @@
     include "../../partials/header.php"
     ?>
 
-     <?php
+    <?php
     include "../../../views/chat.php"
     ?>
-
-
 
     <div class="title">
         <h1>The Power Of Memory</h1>
@@ -78,7 +78,7 @@
     </div>
 
     <!-- Footer -->
-     <?php
+    <?php
     include "../../partials/footer.php"
     ?>
 </body>

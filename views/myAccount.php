@@ -2,16 +2,18 @@
 <html lang="fr">
 
 <head>
-<?php 
-include_once "../projet/partials/head.php"
-?>
-<link rel="stylesheet" href="../assets/style/profil.css">
+    <?php
+    include_once "../projet/partials/head.php"
+    ?>
+    <link rel="stylesheet" href="../assets/style/profil.css">
 </head>
+
 <body>
     <?php
     $page = 'profil';
     include "../projet/partials/header.php"
     ?>
+    <?php require "../projet/utils/userConexion.php"; ?>
 
     <main>
         <div class="banner">
@@ -19,8 +21,7 @@ include_once "../projet/partials/head.php"
                 <div class="banner-content">
                     <img src="../assets/img/profil-pp.jpg">
                     <div>
-                        <h2>Thomas Galabert</h2>
-                        <small>Je suis le mec le plus beau du monde</small>
+                        <h2><?php echo $_SESSION['user_pseudo']; ?> </h2>
                     </div>
                 </div>
             </div>
@@ -34,7 +35,7 @@ include_once "../projet/partials/head.php"
                     <label for="pseudo">Nom d'utilisateur</label>
                     <input type="text" id="pseudo" placeholder="Nom d'utilisateur">
 
-                     <label for="email">Adresse Email</label>
+                    <label for="email">Adresse Email</label>
                     <input type="email" id="email" placeholder="Adresse email">
 
                     <label for="password">Mot de passe</label>
@@ -43,9 +44,6 @@ include_once "../projet/partials/head.php"
                     <label for="confirmPassword">Confirmer le mot de passe</label>
                     <input type="password" id="confirmPassword" placeholder="Confirmer le mot de passe">
 
-                    <label for="bio">A propos</label>
-                    <input type="password" id="bio" placeholder="A propos (max 100 caractères)">
-
                     <button type="submit">Confirmer les modification</button>
                 </form>
             </section>
@@ -53,7 +51,7 @@ include_once "../projet/partials/head.php"
     </main>
 
     <!-- Footer -->
-     <?php
+    <?php
     include "../projet/partials/footer.php"
     ?>
 </body>
