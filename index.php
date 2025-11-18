@@ -1,5 +1,6 @@
 <?php
 require "./projet/utils/database.php";
+require "./projet/utils/userConexion.php";
 
 
 $pdo = connectToDbAndGetPdo();
@@ -20,7 +21,11 @@ function getConnectedUsers()
 
 function getRecordTime()
 {
-    return 0;
+    global $pdo;
+    $request = $pdo->prepare('SELECT MIN(score) as min FROM score');
+    $request->execute();
+    $result = $request->fetch();
+    return $result['min'];
 }
 
 function getRegisteredUsers()
@@ -191,6 +196,7 @@ function getBeatenScores()
     <script>
         AOS.init();
     </script>
+    <script src="/Projet-flash/assets/js/header.js"></script>
 </body>
 
 </html>

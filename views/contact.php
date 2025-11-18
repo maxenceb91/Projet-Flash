@@ -1,3 +1,6 @@
+<?php require "../projet/utils/userConexion.php"; ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -86,5 +89,5 @@ include_once "../projet/partials/head.php"
     include "../projet/partials/footer.php"
     ?>
 </body>
-
+<script src="/Projet-flash/assets/js/header.js"></script>
 </html>

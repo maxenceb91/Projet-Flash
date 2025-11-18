@@ -4,7 +4,10 @@ body {
     background-color: #070320;
     color: #fff;
 }
-
+.highlight{
+  color: #ff0000;
+  text-shadow: 0 0 3px #fff,0 0 0 #ff0000,0 0 30px #ff0000,0 0 0 #ff0000,0 0 9px #ff0000;
+}
 .settings{
   display: flex;
   gap: 5rem;

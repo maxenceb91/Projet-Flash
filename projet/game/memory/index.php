@@ -84,5 +84,5 @@
 </body>
 
 <script src="/Projet-flash/assets/js/index.js"></script>
-
+<script src="/Projet-flash/assets/js/header.js"></script>
 </html>

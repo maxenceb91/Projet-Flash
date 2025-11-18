@@ -1,5 +1,6 @@
 <?php
 require "../../../projet/utils/database.php";
+require "../../utils/userConexion.php"; 
 
 
 $pdo = connectToDbAndGetPdo();
@@ -39,16 +40,16 @@ function displayDifficulty($difficulty)
 
 function getQuery()
 {
-    if (isset($_GET["q"])){
+    if (isset($_GET["q"])) {
         return $_GET["q"];
-    }else{
+    } else {
         return "";
     }
 }
 
 function getSearchScore($char)
 {
-    if ($char == ""){
+    if ($char == "") {
         return getScores();
     }
 
@@ -66,11 +67,18 @@ function getSearchScore($char)
         WHERE user.pseudo LIKE :char
         ORDER BY game.name, score.difficulty DESC, score.score DESC
     ');
-    
+
     $request->execute(['char' => "%$char%"]);
-    
+
     return $request->fetchAll();
 }
+function isPlayer($pseudo){
+    if (isset($_SESSION['user_pseudo'])){
+        return $_SESSION['user_pseudo'] == $pseudo;
+    }
+    return false;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -102,18 +110,18 @@ function getSearchScore($char)
         <div class="settings">
             <form class="search-bar" method="get">
                 <label for="search-bar">Rechercher</label>
-                <input id="search-bar"value="<?= htmlspecialchars(getQuery()) ?>" name="q" type="text">
+                <input id="search-bar" value="<?= htmlspecialchars(getQuery()) ?>" name="q" type="text">
             </form>
 
             <div>
-            <label for="difficulty">Difficulté</label>
-            <select id="difficulty" name="difficulty">
-                <option value="1">Facile</option>
-                <option value="2">Moyen</option>
-                <option value="3">Difficile</option>
-            </select>
+                <label for="difficulty">Difficulté</label>
+                <select id="difficulty" name="difficulty">
+                    <option value="1">Facile</option>
+                    <option value="2">Moyen</option>
+                    <option value="3">Difficile</option>
+                </select>
+            </div>
         </div>
-    </div>
 
         <section class="scoreboard">
             <table>
@@ -133,11 +141,14 @@ function getSearchScore($char)
                     $i = 0;
                     foreach ($scores as $score) {
                         $i++;
+
+                        $class = (isPlayer($score['user_pseudo'])) ? 'highlight' : '';
+
                         echo '<tr>' .
                             '<td>' . $i . '</td>' .
                             '<td>' . '<img src="/Projet-flash/assets/img/game.png" alt="jeu">'
                             . '<span>' . $score['game_name'] . '</span>' . '</td>' .
-                            '<td>' . $score['user_pseudo'] . '</td>' .
+                            '<td class="' . $class . '">' . $score['user_pseudo'] . '</td>' .
                             '<td>' . displayDifficulty($score['difficulty']) . '</td>' .
                             '<td>' . $score['score'] . '</td>' .
                             '<td>' . $score['created_at'] . '</td>' .
@@ -217,5 +228,5 @@ function getSearchScore($char)
 
 
 </body>
-
+<script src="/Projet-flash/assets/js/header.js"></script>
 </html>
