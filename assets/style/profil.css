@@ -39,6 +39,7 @@ body {
 
     label {
         cursor: pointer;
+        padding: 4rem;
     }
 }
 
