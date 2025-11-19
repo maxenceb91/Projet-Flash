@@ -101,6 +101,7 @@ function getBestScore($user_id, $difficulty)
             <section class="profil">
                 <h1>Modifier mon profil</h1>
 
+                <div class="flex-items">
                 <form method="post">
                     <label for="pseudo">Nom d'utilisateur</label>
                     <input type="text" id="pseudo" name="pseudo" value="<?php echo $user['pseudo']; ?>" required>
@@ -115,10 +116,11 @@ function getBestScore($user_id, $difficulty)
                 </form>
 
                 <div class="best-score">
-                    <h1><i class="ri-game-2-fill"></i> Meilleurs scores:</h1>
-                    <h3>🟢 Facile: <?php echo getBestScore($_SESSION["user_id"], 1); ?>s</h3>
-                    <h3>🟠 Moyen: <?php echo getBestScore($_SESSION["user_id"], 2); ?>s</h3>
-                    <h3>🔴 Difficile: <?php echo getBestScore($_SESSION["user_id"], 3); ?>s</h3>
+                    <h1> Meilleurs scores:</h1>
+                    <h3>Facile: <?php echo getBestScore($_SESSION["user_id"], 1); ?>s</h3>
+                    <h3>Moyen: <?php echo getBestScore($_SESSION["user_id"], 2); ?>s</h3>
+                    <h3>Difficile: <?php echo getBestScore($_SESSION["user_id"], 3); ?>s</h3>
+                </div>
                 </div>
             </section>
         </div>
