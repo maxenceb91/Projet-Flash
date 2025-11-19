@@ -1,16 +1,24 @@
 <header>
     <a href="/Projet-flash/index.php">
-        <img src="./assets/img/logo.png" class="logo" alt="logo">
+        <img src="/Projet-flash/assets/img/logo.png" class="logo" alt="logo">
     </a>
     <nav>
-        <a href="/Projet-flash/index.php" class="<?php if ($page == 'accueil') echo 'header-selected'; ?>">Accueil</a>
-        <a href="/Projet-flash/projet/game/memory/score.php" class="<?php if ($page == 'scores') echo 'header-selected'; ?>">Scores</a>
+        <a href="/Projet-flash/index.php"
+            class="<?php echo (isset($page) && $page === 'accueil') ? 'header-selected' : ''; ?>">
+            Accueil
+        </a>
+
+        <a href="/Projet-flash/projet/game/memory/score.php"
+            class="<?php echo (isset($page) && $page === 'scores') ? 'header-selected' : ''; ?>">
+            Scores
+        </a>
+
         <a class="contact-btn " href="/Projet-flash/views/contact.php">Nous contacter</a>
-        
+
         <?php
         if (isset($_SESSION['user_id'])) {
             echo '<img src="/Projet-flash/assets/img/profil-pp.jpg" class="pp-menu">';
-            
+
             echo '<div class="menu">';
             echo '    <a href="/Projet-flash/views/myAccount.php"><i class="ri-user-line"></i> Profil</a>';
             echo '    <a class="logout-btn" href="/Projet-flash/projet/utils/logout.php"><i class="ri-logout-box-line"></i> Déconnexion</a>';
