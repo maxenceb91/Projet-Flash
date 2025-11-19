@@ -76,7 +76,7 @@ function isPlayer($pseudo){
     }
     return false;
 }
-
+session_start()
 ?>
 
 <!DOCTYPE html>
