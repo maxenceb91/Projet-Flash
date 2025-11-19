@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_pseudo'] = $user['pseudo'];
 
-            header("Location: http://localhost:8888/Projet-Flash/projet/game/memory/index.php");
+            header("Location: /Projet-Flash/projet/game/memory/index.php");
             exit();
         } else {
             $message = "Email ou mot de passe incorrect";

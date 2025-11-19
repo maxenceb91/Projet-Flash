@@ -1,6 +1,3 @@
-<?php require "../projet/utils/userConexion.php"; ?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
