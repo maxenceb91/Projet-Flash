@@ -1,7 +1,6 @@
 <?php
+
 require "./projet/utils/database.php";
-
-
 $pdo = connectToDbAndGetPdo();
 
 function getPlayedGames()
@@ -40,7 +39,7 @@ function getBeatenScores()
 {
     return 0;
 }
-
+session_start()
 ?>
 
 <!DOCTYPE html>

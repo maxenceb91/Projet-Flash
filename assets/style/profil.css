@@ -48,6 +48,12 @@ body {
 }
 .profile-picture-wrapper{
     position: relative;
+    width: 200px;
+    height: 200px;
+    img{
+        width: 200px;
+        height: 200px;
+    }
 }
 .container,
 .container-banner {

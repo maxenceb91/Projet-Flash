@@ -3,53 +3,56 @@ require "../projet/utils/userConexion.php";
 require "../projet/utils/database.php";
 
 $pdo = connectToDbAndGetPdo();
-$message = "";
-
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT email, pseudo FROM user WHERE id = ?";
+
+$sql = "SELECT email, pseudo, profile_picture FROM user WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $new_pseudo = $_POST['pseudo'];
-    $new_email = $_POST['email'];
-    $new_password = $_POST['password'];
-    $confirm_password = $_POST['confirmPassword'];
-
-    if (strlen($new_pseudo) < 4) {
-        $message = "Le pseudo doit avoir au moins 4 caractères";
-    } elseif (!empty($new_password)) {
-        if (strlen($new_password) < 8) {
-            $message = "Le mot de passe doit avoir au moins 8 caractères";
-        } elseif ($new_password !== $confirm_password) {
-            $message = "Les mots de passe ne correspondent pas";
-        } else {
-            $hashedPassword = password_hash($new_password, PASSWORD_DEFAULT);
-            $sql = "UPDATE user SET email = ?, pseudo = ?, password = ?, updated_at = NOW() WHERE id = ?";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$new_email, $new_pseudo, $hashedPassword, $user_id]);
-
-            $_SESSION['user_pseudo'] = $new_pseudo;
-            $user['pseudo'] = $new_pseudo;
-            $user['email'] = $new_email;
-            $message = "Profil modifié avec succès !";
-        }
-    } else {
-        $sql = "UPDATE user SET email = ?, pseudo = ?, updated_at = NOW() WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$new_email, $new_pseudo, $user_id]);
-
-        $_SESSION['user_pseudo'] = $new_pseudo;
-        $user['pseudo'] = $new_pseudo;
-        $user['email'] = $new_email;
-        $message = "Profil modifié avec succès !";
-    }
+if (isset($_FILES['profile_picture'])) {
+    $fichier = $_FILES['profile_picture'];
+    $nouveau_nom = "user_" . $user_id . "_" . time() . ".jpg";
+    
+    move_uploaded_file($fichier['tmp_name'], "../usersfiles/" . $nouveau_nom);
+    
+    $sql = "UPDATE user SET profile_picture = ? WHERE id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$nouveau_nom, $user_id]);
+    
+    $user['profile_picture'] = $nouveau_nom;
 }
+
+if (isset($_POST['pseudo'])) {
+    $pseudo = $_POST['pseudo'];
+    $email = $_POST['email'];
+    $mdp = $_POST['password'];
+    
+    if (!empty($mdp)) {
+        $mdp_crypte = password_hash($mdp, PASSWORD_DEFAULT);
+        $sql = "UPDATE user SET email = ?, pseudo = ?, password = ? WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$email, $pseudo, $mdp_crypte, $user_id]);
+    } 
+
+    else {
+        $sql = "UPDATE user SET email = ?, pseudo = ? WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$email, $pseudo, $user_id]);
+    }
+    
+    $_SESSION['user_pseudo'] = $pseudo;
+    $user['pseudo'] = $pseudo;
+    $user['email'] = $email;
+}
+
+$photo = !empty($user['profile_picture']) 
+    ? "../usersfiles/" . $user['profile_picture']
+    : "../assets/img/profil-pp.jpg";
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <?php include_once "../projet/partials/head.php" ?>
     <link rel="stylesheet" href="../assets/style/profil.css">
@@ -66,13 +69,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="container-banner">
                 <div class="banner-content">
                     <div class="profile-picture-wrapper">
-                        <img src="../assets/img/profil-pp.jpg" alt="Photo de profil">
+                        <img src="<?php echo $photo; ?>" alt="Photo" id="profile-preview">
 
                         <div class="edit-pp">
-                            <label for="change-pp" class="edit-pp-btn" title="Modifier la photo de profil">
-                                <i class="ri-pencil-fill"></i>
-                            </label>
-                            <input type="file" id="change-pp" name="profile_picture" accept="image/*" style="display: none;">
+                            <form method="post" enctype="multipart/form-data" id="profile-pic-form">
+                                <label for="change-pp" class="edit-pp-btn">
+                                    <i class="ri-pencil-fill"></i>
+                                </label>
+                                <input type="file" id="change-pp" name="profile_picture" style="display: none;">
+                            </form>
                         </div>
                     </div>
 
@@ -82,38 +87,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
         </div>
+
         <div class="container">
             <section class="profil">
                 <h1>Modifier mon profil</h1>
 
-                <?php if ($message): ?>
-                    <p class="message">
-                        <?php echo $message; ?>
-                    </p>
-                <?php endif; ?>
-
                 <form method="post">
                     <label for="pseudo">Nom d'utilisateur</label>
-                    <input type="text" id="pseudo" name="pseudo" value="<?php echo htmlspecialchars($user['pseudo']); ?>" required>
+                    <input type="text" id="pseudo" name="pseudo" value="<?php echo $user['pseudo']; ?>" required>
 
-                    <label for="email">Adresse Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required>
 
-                    <label for="password">Nouveau mot de passe (laisser vide pour ne pas changer)</label>
-                    <input type="password" id="password" name="password" placeholder="8 caractères minimum">
+                    <label for="password">Nouveau mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Laisser vide si pas de changement">
 
-                    <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="8 caractères minimum">
-
-                    <button type="submit">Confirmer les modifications</button>
+                    <button type="submit">Modifier</button>
                 </form>
             </section>
         </div>
     </main>
 
-    <!-- Footer -->
     <?php include "../projet/partials/footer.php" ?>
-</body>
-<script src="/Projet-flash/assets/js/header.js"></script>
 
+    <script src="/Projet-flash/assets/js/header.js"></script>
+    <script>
+        document.getElementById('change-pp').addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profile-preview').src = e.target.result;
+                };
+                reader.readAsDataURL(this.files[0]);
+                document.getElementById('profile-pic-form').submit();
+            }
+        });
+    </script>
+</body>
 </html>
