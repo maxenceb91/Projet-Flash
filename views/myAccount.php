@@ -13,13 +13,13 @@ $user = $stmt->fetch();
 if (isset($_FILES['profile_picture'])) {
     $fichier = $_FILES['profile_picture'];
     $nouveau_nom = "user_" . $user_id . "_" . time() . ".jpg";
-    
+
     move_uploaded_file($fichier['tmp_name'], "../usersfiles/" . $nouveau_nom);
-    
+
     $sql = "UPDATE user SET profile_picture = ? WHERE id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$nouveau_nom, $user_id]);
-    
+
     $user['profile_picture'] = $nouveau_nom;
 }
 
@@ -27,32 +27,41 @@ if (isset($_POST['pseudo'])) {
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
     $mdp = $_POST['password'];
-    
+
     if (!empty($mdp)) {
         $mdp_crypte = password_hash($mdp, PASSWORD_DEFAULT);
         $sql = "UPDATE user SET email = ?, pseudo = ?, password = ? WHERE id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$email, $pseudo, $mdp_crypte, $user_id]);
-    } 
-
-    else {
+    } else {
         $sql = "UPDATE user SET email = ?, pseudo = ? WHERE id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$email, $pseudo, $user_id]);
     }
-    
+
     $_SESSION['user_pseudo'] = $pseudo;
     $user['pseudo'] = $pseudo;
     $user['email'] = $email;
 }
 
-$photo = !empty($user['profile_picture']) 
+$photo = !empty($user['profile_picture'])
     ? "../usersfiles/" . $user['profile_picture']
     : "../assets/img/profil-pp.jpg";
+
+function getBestScore($user_id, $difficulty)
+{
+    global $pdo;
+    $sql = "SELECT MIN(score) as best_score FROM score WHERE user_id = ? AND difficulty = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$user_id, $difficulty]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['best_score'];
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <?php include_once "../projet/partials/head.php" ?>
     <link rel="stylesheet" href="../assets/style/profil.css">
@@ -104,6 +113,13 @@ $photo = !empty($user['profile_picture'])
 
                     <button type="submit">Modifier</button>
                 </form>
+
+                <div class="best-score">
+                    <h1><i class="ri-game-2-fill"></i> Meilleurs scores:</h1>
+                    <h3>🟢 Facile: <?php echo getBestScore($_SESSION["user_id"], 1); ?>s</h3>
+                    <h3>🟠 Moyen: <?php echo getBestScore($_SESSION["user_id"], 2); ?>s</h3>
+                    <h3>🔴 Difficile: <?php echo getBestScore($_SESSION["user_id"], 3); ?>s</h3>
+                </div>
             </section>
         </div>
     </main>
@@ -124,4 +140,5 @@ $photo = !empty($user['profile_picture'])
         });
     </script>
 </body>
+
 </html>

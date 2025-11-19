@@ -70,8 +70,10 @@ session_start()
             <small>Jouez. Mémorisez. Gagnez.</small>
             <h1>Des jeux rapides et addictifs</h1>
             <p>GameBase vous propose des mini-jeux amusants et rapides pour défier votre mémoire, votre vitesse et vos réflexes. Défiez vos amis, améliorez vos scores et amusez-vous en quelques minutes seulement.</p>
+            <a href="<?php echo isset($_SESSION['user_id']) ? './projet/game/memory/index.php' : './views/login.php'; ?>">
+                Commencer !
+            </a>
 
-            <a href="./views/login.php">Commencer !</a>
             <img src="./assets/img/Banner-Image.png">
         </section>
 

@@ -5,6 +5,10 @@
 <head>
 <?php 
 include_once "../projet/partials/head.php";
+
+require "../projet/utils/database.php";
+$pdo = connectToDbAndGetPdo();
+
 session_start();
 ?>
 <link rel="stylesheet" href="../assets/style/contact.css">
@@ -22,7 +26,7 @@ session_start();
     </div>
 
     <div class="map-container">
-        <img src="../assets/img/map.png" alt="map">
+        <img src="../assets/img/map2.png" alt="map">
     </div>
 
     <div class="container">

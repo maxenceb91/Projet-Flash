@@ -16,7 +16,7 @@ function getScores()
         FROM `score`
         JOIN `user` ON user.id = score.user_id
         JOIN `game` ON game.id = score.game_id
-        ORDER BY game.name, difficulty DESC, score DESC;
+        ORDER BY game.name, difficulty DESC, score;
     ');
     $request->execute();
     return $request->fetchAll();
@@ -148,7 +148,7 @@ session_start()
                             . '<span>' . $score['game_name'] . '</span>' . '</td>' .
                             '<td class="' . $class . '">' . $score['user_pseudo'] . '</td>' .
                             '<td>' . displayDifficulty($score['difficulty']) . '</td>' .
-                            '<td>' . $score['score'] . '</td>' .
+                            '<td>' . $score['score'] . 's</td>' .
                             '<td>' . $score['created_at'] . '</td>' .
                             '</tr>';
                     }
