@@ -19,7 +19,14 @@ body {
         font-size: 1.8rem;
     }
 }
+.flex-items{
+    display: flex;
+    gap: 5rem;
 
+    div{
+        margin-top: 2rem;
+    }
+}
 .edit-pp {
     position: absolute;
     border-radius: 50%;
@@ -42,7 +49,11 @@ body {
         padding: 4rem;
     }
 }
-
+.flex-items{
+    form,div{
+        width: 100%;
+    }
+}
 .profile-picture-wrapper:hover {
     .edit-pp {
         opacity: 1;
@@ -57,6 +68,7 @@ body {
     img {
         width: 200px;
         height: 200px;
+        object-fit: cover;
     }
 }
 
@@ -79,7 +91,7 @@ body {
     bottom: -90px;
     display: flex;
     align-items: end;
-    gap: 4rem;
+    gap: 1rem;
 
     small {
         color: #71717a;
@@ -88,7 +100,6 @@ body {
 
 .profil {
     margin-top: 10rem;
-    max-width: 50%;
 
     label,
     input {
@@ -132,12 +143,11 @@ form button {
 }
 
 @media (max-width: 768px) {
+    .flex-items{
+        flex-direction: column;
+    }
     .profil {
         max-width: 100%;
-    }
-
-    .banner-content img {
-        width: 130px;
     }
 
     .banner-content {
