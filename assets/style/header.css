@@ -1,6 +1,6 @@
 /*Header*/
 
-header{
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,7 +11,8 @@ header{
     background: #070320;
     z-index: 9999;
 }
-.pp-menu{
+
+.pp-menu {
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -19,7 +20,7 @@ header{
     border-radius: 50%;
 }
 
-.menu{
+.menu {
     position: absolute;
     width: 250px;
     background-color: #161231;
@@ -32,7 +33,8 @@ header{
     opacity: 0;
     visibility: hidden;
     transition: .3s;
-    a{
+
+    a {
         display: block;
         color: #fff;
         text-decoration: none;
@@ -40,31 +42,36 @@ header{
         transition: all .3s;
 
     }
-    a:hover{
+
+    a:hover {
         background: #252140;
     }
 }
 
-.menu-visible{
+.menu-visible {
     opacity: 1 !important;
     visibility: visible !important;
 }
-.logout-btn{
+
+.logout-btn {
     border-top: 1px solid #252140;
 }
-.header-selected{
+
+.header-selected {
     color: red;
 }
-.logo{
+
+.logo {
     width: 35px;
 }
-.contact-btn{
+
+.contact-btn {
     background-color: #d80027;
     padding: 10px;
     border-radius: 10px;
 }
 
-header nav{
+header nav {
     display: flex;
     align-items: center;
     gap: 70px;
@@ -76,30 +83,36 @@ header nav a {
     text-decoration: none;
 }
 
-.burger-menu{
+header nav a:hover {
+    color: red;
+}
+
+.burger-menu {
     display: none;
-    span{
+
+    span {
         width: 25px;
         height: 3px;
         background-color: #fff;
         display: block;
     }
+
     cursor: pointer;
 }
 
-.burger-container{
+.burger-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-@media (max-width: 768px){
-    header{
-        nav{
+@media (max-width: 768px) {
+    header {
+        nav {
             display: none;
         }
 
-        .burger-menu{
+        .burger-menu {
             display: block;
         }
     }
