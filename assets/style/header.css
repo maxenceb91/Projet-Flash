@@ -83,9 +83,7 @@ header nav a {
     text-decoration: none;
 }
 
-header nav a:hover {
-    color: red;
-}
+
 
 .burger-menu {
     display: none;

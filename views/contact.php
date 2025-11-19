@@ -4,7 +4,8 @@
 
 <head>
 <?php 
-include_once "../projet/partials/head.php"
+include_once "../projet/partials/head.php";
+session_start();
 ?>
 <link rel="stylesheet" href="../assets/style/contact.css">
 </head>
