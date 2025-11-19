@@ -63,7 +63,7 @@ function getSearchScore($char)
         JOIN user ON user.id = score.user_id
         JOIN game ON game.id = score.game_id
         WHERE user.pseudo LIKE :char
-        ORDER BY game.name, score.difficulty DESC, score.score DESC
+        ORDER BY game.name, score.difficulty DESC, score.score
     ');
 
     $request->execute(['char' => "%$char%"]);
