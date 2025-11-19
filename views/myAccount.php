@@ -1,4 +1,4 @@
-<?php 
+<?php
 require "../projet/utils/userConexion.php";
 require "../projet/utils/database.php";
 
@@ -16,34 +16,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_email = $_POST['email'];
     $new_password = $_POST['password'];
     $confirm_password = $_POST['confirmPassword'];
-    
+
     if (strlen($new_pseudo) < 4) {
         $message = "Le pseudo doit avoir au moins 4 caractères";
-    }
-    elseif (!empty($new_password)) {
+    } elseif (!empty($new_password)) {
         if (strlen($new_password) < 8) {
             $message = "Le mot de passe doit avoir au moins 8 caractères";
-        }
-        elseif ($new_password !== $confirm_password) {
+        } elseif ($new_password !== $confirm_password) {
             $message = "Les mots de passe ne correspondent pas";
-        }
-        else {
+        } else {
             $hashedPassword = password_hash($new_password, PASSWORD_DEFAULT);
             $sql = "UPDATE user SET email = ?, pseudo = ?, password = ?, updated_at = NOW() WHERE id = ?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$new_email, $new_pseudo, $hashedPassword, $user_id]);
-            
+
             $_SESSION['user_pseudo'] = $new_pseudo;
             $user['pseudo'] = $new_pseudo;
             $user['email'] = $new_email;
             $message = "Profil modifié avec succès !";
         }
-    }
-    else {
+    } else {
         $sql = "UPDATE user SET email = ?, pseudo = ?, updated_at = NOW() WHERE id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$new_email, $new_pseudo, $user_id]);
-        
+
         $_SESSION['user_pseudo'] = $new_pseudo;
         $user['pseudo'] = $new_pseudo;
         $user['email'] = $new_email;
@@ -69,7 +65,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="banner">
             <div class="container-banner">
                 <div class="banner-content">
-                    <img src="../assets/img/profil-pp.jpg">
+                    <div class="profile-picture-wrapper">
+                        <img src="../assets/img/profil-pp.jpg" alt="Photo de profil">
+
+                        <div class="edit-pp">
+                            <label for="change-pp" class="edit-pp-btn" title="Modifier la photo de profil">
+                                <i class="ri-pencil-fill"></i>
+                            </label>
+                            <input type="file" id="change-pp" name="profile_picture" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+
                     <div>
                         <h2><?php echo $_SESSION['user_pseudo']; ?></h2>
                     </div>
@@ -109,4 +115,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include "../projet/partials/footer.php" ?>
 </body>
 <script src="/Projet-flash/assets/js/header.js"></script>
+
 </html>

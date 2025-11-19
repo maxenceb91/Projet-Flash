@@ -1,7 +1,5 @@
 <?php
 require "../../../projet/utils/database.php";
-require "../../utils/userConexion.php"; 
-
 
 $pdo = connectToDbAndGetPdo();
 

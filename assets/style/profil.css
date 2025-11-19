@@ -20,6 +20,35 @@ body {
     }
 }
 
+.edit-pp{
+    position: absolute;
+    border-radius: 50%;
+    background: #f006;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    top: 0;
+     opacity: 0;
+     transition: .1s;
+    label{
+        cursor: pointer;
+    }
+}
+
+.profile-picture-wrapper:hover{
+    .edit-pp{
+        opacity: 1;
+    }
+}
+.profile-picture-wrapper{
+    position: relative;
+}
 .container,
 .container-banner {
     max-width: 1260px;
