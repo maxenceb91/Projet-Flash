@@ -197,7 +197,7 @@ figcaption {
 
 .msg-me .msg {
     background: #D80027;
-    color: white;
+    color: rgb(0, 200, 255);
 }
 
 .msg-dt {
@@ -224,8 +224,8 @@ figcaption {
 }
 
 .gif {
-    border-radius: 20px;
     width: 40%;
+    border-radius: 8px;
     margin-bottom: 20px;
     align-self: center;
 }
