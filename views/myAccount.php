@@ -102,25 +102,35 @@ function getBestScore($user_id, $difficulty)
                 <h1>Modifier mon profil</h1>
 
                 <div class="flex-items">
-                <form method="post">
-                    <label for="pseudo">Nom d'utilisateur</label>
-                    <input type="text" id="pseudo" name="pseudo" value="<?php echo $user['pseudo']; ?>" required>
+                    <form method="post">
+                        <label for="pseudo">Nom d'utilisateur</label>
+                        <input type="text" id="pseudo" name="pseudo" value="<?php echo $user['pseudo']; ?>" required>
 
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required>
 
-                    <label for="password">Nouveau mot de passe</label>
-                    <input type="password" id="password" name="password" placeholder="Laisser vide si pas de changement">
+                        <label for="password">Nouveau mot de passe</label>
+                        <input type="password" id="password" name="password" placeholder="Laisser vide si pas de changement">
 
-                    <button type="submit">Modifier</button>
-                </form>
+                        <button type="submit">Modifier</button>
+                    </form>
 
-                <div class="best-score">
-                    <h1> Meilleurs scores:</h1>
-                    <h3>Facile: <?php echo getBestScore($_SESSION["user_id"], 1); ?>s</h3>
-                    <h3>Moyen: <?php echo getBestScore($_SESSION["user_id"], 2); ?>s</h3>
-                    <h3>Difficile: <?php echo getBestScore($_SESSION["user_id"], 3); ?>s</h3>
-                </div>
+                    <div class="best-score">
+                        <h1>Meilleurs scores</h1>
+                        <div class="score easy">
+                            <span>Facile</span>
+                            <span><?php echo getBestScore($_SESSION["user_id"], 1); ?>s</span>
+                        </div>
+                        <div class="score medium">
+                            <span>Moyen</span>
+                            <span><?php echo getBestScore($_SESSION["user_id"], 2); ?>s</span>
+                        </div>
+                        <div class="score hard">
+                            <span>Difficile</span>
+                            <span><?php echo getBestScore($_SESSION["user_id"], 3); ?>s</span>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </div>

@@ -1,4 +1,6 @@
-<?php require "../../utils/userConexion.php"; ?>
+<?php 
+require "../../utils/userConexion.php";
+?>
 
 <!DOCTYPE html>
 <html lang="fr">

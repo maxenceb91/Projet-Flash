@@ -1,6 +1,5 @@
 body {
-  font-family: 'Poppins', sans-serif;
-
+    font-family: 'Poppins', sans-serif;
     background-color: #070320;
     color: #fff;
 }
@@ -91,6 +90,16 @@ body {
     font-size: 20px;
 }
 
+.error {
+  margin-top: 20px;
+  color: #ff0000;
+}
+
+.succes {
+  margin-top: 20px;
+  color: #00ff26;
+}
+
 form {
     max-width: 600px;
     padding: 0 20px;
@@ -164,15 +173,15 @@ label {
         display: block;
     }
 
-    .phone{
+    .phone {
         border: none !important;
     }
 
-    .contact-container h1{
+    .contact-container h1 {
         font-size: 35px;
     }
 
-    .social-container{
+    .social-container {
         text-align: center;
     }
 

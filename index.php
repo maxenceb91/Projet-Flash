@@ -49,6 +49,7 @@ session_start()
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game base</title>
+    <link rel="icon" type="image/png" href="./assets/img/logo.png">
     <link rel="stylesheet" href="./assets/style/index.css">
     <link rel="stylesheet" href="./assets/style/header.css">
     <link rel="stylesheet" href="./assets/style/footer.css">
@@ -75,6 +76,7 @@ session_start()
             </a>
 
             <img src="./assets/img/Banner-Image.png">
+            
         </section>
 
         <section class="game-section" data-aos="fade-up" data-aos-duration="1500">

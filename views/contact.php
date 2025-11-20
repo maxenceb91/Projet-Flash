@@ -3,15 +3,29 @@
 
 
 <head>
-<?php 
-include_once "../projet/partials/head.php";
+    <?php
+    include_once "../projet/partials/head.php";
 
-require "../projet/utils/database.php";
-$pdo = connectToDbAndGetPdo();
+    require "../projet/utils/database.php";
+    $pdo = connectToDbAndGetPdo();
 
-session_start();
-?>
-<link rel="stylesheet" href="../assets/style/contact.css">
+    session_start();
+
+    $alert_message = 0;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $email = $_POST['email'];
+        $message = $_POST['message'];
+        if (empty($firstName) || empty($lastName) || empty($email) || empty($message)) {
+            $alert_message = 1;
+            return;
+        }
+
+        $alert_message = 2;
+    }
+    ?>
+    <link rel="stylesheet" href="../assets/style/contact.css">
 </head>
 
 <body>
@@ -57,28 +71,38 @@ session_start();
     <div class="contact-container">
         <h1>Contactez-nous !</h1>
         <small>Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</small>
+        <?php if ($alert_message): ?>
+            <?php
+            if ($alert_message == 1) {
+                echo '<p class="error"><i class="ri-calendar-close-line"></i> Certains champs sont vides</p>';
+            } else if ($alert_message == 2) {
+                echo '<p class="succes"><i class="ri-mail-check-line"></i> Message envoyé avec succès !</p>';
+            }
+            ?>
+        <?php endif; ?>
+
     </div>
 
     <form action="" method="post">
         <div class="flex-form">
             <div>
                 <label for="firstName">Prénom</label>
-                <input type="text" id="firstName">
+                <input type="text" id="firstName" name="firstName">
             </div>
             <div>
                 <label for="lastName">Nom</label>
-                <input type="text" id="lastName">
+                <input type="text" id="lastName" name="lastName">
             </div>
         </div>
 
         <div class="email-input">
             <label for="email">Adresse email</label>
-            <input type="email" id="email">
+            <input type="email" id="email" name="email">
         </div>
 
         <div class="textarea">
             <label for="message">Message</label>
-            <textarea id="message"></textarea>
+            <textarea id="message" name="message"></textarea>
         </div>
 
         <div class="btn-container">
@@ -92,4 +116,5 @@ session_start();
     ?>
 </body>
 <script src="/Projet-flash/assets/js/header.js"></script>
+
 </html>

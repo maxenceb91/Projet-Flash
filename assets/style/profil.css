@@ -142,6 +142,54 @@ form button {
     border: none;
 }
 
+.best-score {
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
+    margin: 30px auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
+}
+
+.best-score h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 25px;
+    color: #1f2937;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+
+.score span:first-child {
+    font-size: 1.1em;
+}
+
+.score span:last-child {
+    font-size: 1.2em;
+}
+
+.score.easy { background-color: #2dd36f; }
+.score.medium { background-color: #ffc409; color: #333; }
+.score.hard { background-color: #eb445a; }
+
+.score:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .flex-items{
         flex-direction: column;

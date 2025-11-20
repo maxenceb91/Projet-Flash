@@ -6,5 +6,4 @@ btnChat.addEventListener('click', () => {
     console.log("c'est moi wsh")
 
     btnChat.classList.toggle('return-i')
-
 })

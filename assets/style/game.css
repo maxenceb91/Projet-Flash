@@ -138,11 +138,19 @@ label {
 }
 
 .pp {
-    color: #FFC421;
-    background-color: #fff4d0;
-    padding: 6px 4px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
     border-radius: 50%;
-    width: max-content;
+}
+
+figcaption{
+    font-size: 8px;
+}
+
+.blue{
+    color: #7bd1df;
 }
 
 .chat {
