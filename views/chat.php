@@ -1,15 +1,28 @@
 <?php
 global $pdo;
 
-$request = $pdo->prepare('SELECT 
-message.message,
-user.pseudo,
-user.id,
-TIMESTAMPDIFF(MINUTE, message.created_at, NOW()) AS minutes_ago
-FROM message
-JOIN user ON user.id = message.user_id
-WHERE message.created_at >= NOW() - INTERVAL 24 HOUR
-ORDER BY message.created_at ASC;');
+$request = $pdo->prepare('
+SELECT
+    t1.message,
+    t1.pseudo,
+    t1.id,
+    TIMESTAMPDIFF(MINUTE, t1.created_at, NOW()) AS minutes_ago
+FROM (
+    -- Sous-requête : Sélectionne les 3 messages les plus récents
+    SELECT 
+        message.message,
+        user.pseudo,
+        user.id,
+        message.created_at
+    FROM message
+    JOIN user ON user.id = message.user_id
+    WHERE message.created_at >= NOW() - INTERVAL 24 HOUR
+    ORDER BY message.created_at DESC
+    LIMIT 3
+) AS t1
+-- Requête externe : Trie ce sous-ensemble du plus ancien au plus récent (pour que le plus récent soit en bas)
+ORDER BY t1.created_at ASC;
+');
 
 $request->execute();
 $messages = $request->fetchAll();
@@ -74,62 +87,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+
+function formatPseudo($pseudo)
+{
+    $parts = explode(' ', trim($pseudo));
+
+    if (count($parts) >= 2) {
+        $firstName = $parts[0];
+        $lastNameInitial = substr($parts[1], 0, 1) . '.';
+        return $firstName . ' ' . $lastNameInitial;
+    }
+
+    return $pseudo;
+}
 ?>
 
 <section class="chat-section">
+    
     <div class="head-chat">
         <button><i class="ri-arrow-left-s-line"></i></button>
         <p>Power Of Memory</p>
     </div>
 
     <div class="chat">
+        
         <?php foreach ($messages as $message): ?>
-            <div class="<?= isUser($message["pseudo"]) ? 'msg-me' : 'msg-dt' ?>">
-
-                <?php if (!isUser($message["pseudo"])): ?>
+            <?php
+            // Logique pour déterminer l'expéditeur et la classe principale
+            $is_user = isUser($message["pseudo"]);
+            $message_class = $is_user ? 'msg-me' : 'msg-dt';
+            ?>
+            
+            <div class="<?= $message_class ?>">
+                
+                <?php if ($is_user): ?>
+                    <div class="msg-me-container">
+                <?php else: ?>
                     <div class="msg-dt-container">
-                    <?php endif; ?>
-
-                    <figure>
-                        <img class="pp" src="<?= htmlspecialchars(getPhoto($pdo, $message["id"])) ?>" alt="PP de <?= htmlspecialchars($message["pseudo"]) ?>">
-                        <figcaption>
-                            <?php echo htmlspecialchars($message["pseudo"]) ?>
-                        </figcaption>
-                    </figure>
-
-                    <div class="msg">
-                        <span class="<?= isUser($message["pseudo"]) ? 'blue' : '' ?>">
-                            <?= htmlspecialchars($message["message"]) ?>
-                        </span>
-                    </div>
-
-                    <?php if (!isUser($message["pseudo"])): ?>
-                    </div>
                 <?php endif; ?>
+
+                        <figure>
+                            <img class="pp" 
+                                 src="<?= htmlspecialchars(getPhoto($pdo, $message["id"])) ?>" 
+                                 alt="PP de <?= htmlspecialchars($message["pseudo"]) ?>">
+                            <figcaption>
+                                <?php echo htmlspecialchars(formatPseudo($message["pseudo"])) ?>
+                            </figcaption>
+                        </figure>
+
+                        <div class="msg">
+                            <p><?= htmlspecialchars($message["message"]) ?></p>
+                        </div>
+
+                </div> 
 
                 <small><?= formatMinutesAgo($message["minutes_ago"]) ?></small>
             </div>
+            
         <?php endforeach; ?>
 
         <?php
         $api = "https://api.thecatapi.com/v1/images/search?mime_types=gif";
-        $json = file_get_contents($api);
-        $data = json_decode($json, true);
+        // Utilisation de @ pour éviter les warnings en cas d'échec de file_get_contents
+        $json = @file_get_contents($api); 
+        $data = $json ? json_decode($json, true) : null;
         $gifUrl = $data[0]['url'] ?? null;
         ?>
 
         <?php if ($gifUrl): ?>
-            <img src="<?= htmlspecialchars($gifUrl) ?>" alt="Chat GIF">
+            <img class="gif" src="<?= htmlspecialchars($gifUrl) ?>" alt="Chat GIF">
         <?php else: ?>
             <p>Impossible de charger le GIF.</p>
         <?php endif; ?>
+        
     </div>
 
     <form method="post">
-        <label for="msg">Votre message</label>
-        <input type="text" id="msg" name="msg" placeholder="Votre message" autocomplete="off">
-        <button type="submit" style="display:none;"></button>
-    </form>
+        <label for="msg" style="display:none;">Votre message</label>
+        <input type="text" id="msg" name="msg" placeholder="Votre message" autocomplete="off" required>
+        <button type="submit" style="display:none;"></button> 
+        </form>
+    
 </section>
 
 <button class="btn-chat"><i class="ri-arrow-down-s-line"></i></button>
