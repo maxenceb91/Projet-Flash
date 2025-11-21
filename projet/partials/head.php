@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game base</title>
+<title>Game Base</title>
 <link rel="icon" type="image/png" href="/Projet-flash/assets/img/logo.png">
 <link rel="stylesheet" href="/Projet-flash/assets/style/base.css">
 <link rel="stylesheet" href="/Projet-flash/assets/style/header.css">

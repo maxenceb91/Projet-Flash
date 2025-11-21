@@ -137,15 +137,15 @@ function getPlayedGame($user_id)
                             <p>Meilleurs Scores :</p>
                             <div class="score easy">
                                 <span><i class="ri-emotion-happy-line"></i> Facile</span>
-                                <span><?php echo getBestScore($_SESSION["user_id"], 1); ?>s</span>
+                                <span><?php echo getBestScore($_SESSION["user_id"], 1) ?? 0; ?>s</span>
                             </div>
                             <div class="score medium">
                                 <span><i class="ri-emotion-normal-line"></i> Moyen</span>
-                                <span><?php echo getBestScore($_SESSION["user_id"], 2); ?>s</span>
+                                <span><?php echo getBestScore($_SESSION["user_id"], 2) ?? 0; ?>s</span>
                             </div>
                             <div class="score hard">
                                 <span><i class="ri-emotion-unhappy-line"></i> Difficile</span>
-                                <span><?php echo getBestScore($_SESSION["user_id"], 3); ?>s</span>
+                                <span><?php echo getBestScore($_SESSION["user_id"], 3) ?? 0; ?>s</span>
                             </div>
                         </div>
                     </div>
