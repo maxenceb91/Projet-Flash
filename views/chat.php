@@ -8,7 +8,6 @@ SELECT
     t1.id,
     TIMESTAMPDIFF(MINUTE, t1.created_at, NOW()) AS minutes_ago
 FROM (
-    -- Sous-requête : Sélectionne les 3 messages les plus récents
     SELECT 
         message.message,
         user.pseudo,
@@ -20,7 +19,6 @@ FROM (
     ORDER BY message.created_at DESC
     LIMIT 3
 ) AS t1
--- Requête externe : Trie ce sous-ensemble du plus ancien au plus récent (pour que le plus récent soit en bas)
 ORDER BY t1.created_at ASC;
 ');
 
@@ -35,7 +33,7 @@ function isUser($pseudo)
 function addMessage($game, $sender_id, $message)
 {
     global $pdo;
-    $request = $pdo->prepare('INSERT INTO message (game_id, user_id, message, created_at) VALUES (?, ?, ?, NOW());'); // Ajout de NOW()
+    $request = $pdo->prepare('INSERT INTO message (game_id, user_id, message, created_at) VALUES (?, ?, ?, NOW());');
     $request->bindValue(1, $game, PDO::PARAM_INT);
     $request->bindValue(2, $sender_id, PDO::PARAM_INT);
     $request->bindValue(3, $message, PDO::PARAM_STR);
