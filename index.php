@@ -35,10 +35,47 @@ function getRegisteredUsers()
     return $result['total'];
 }
 
+function getBeatenScoresInDifficulty($difficulty)
+{
+    global $pdo;
+
+    $sql = "
+    SELECT
+        COUNT(t1.id) AS total_records
+    FROM
+        score t1
+    WHERE
+        DATE(t1.created_at) = CURRENT_DATE()
+        AND t1.difficulty = :difficulty
+        AND t1.score <= COALESCE((
+            SELECT
+                MIN(t2.score)
+            FROM
+                score t2
+            WHERE
+                t2.user_id = t1.user_id
+                AND t2.game_id = t1.game_id
+                AND t2.difficulty = t1.difficulty
+                AND DATE(t2.created_at) < CURRENT_DATE()
+        ), t1.score + 1);
+    ";
+
+    $request = $pdo->prepare($sql);
+    $request->execute([':difficulty' => $difficulty]);
+    $total = $request->fetchColumn();
+    return $total;
+}
+
 function getBeatenScores()
 {
-    return 0;
+    $total = 0;
+    for ($i = 0; $i < 3; $i++) {
+        $total += getBeatenScoresInDifficulty($i + 1);
+    }
+
+    return $total;
 }
+
 session_start()
 ?>
 

@@ -103,33 +103,32 @@ function formatPseudo($pseudo)
 ?>
 
 <section class="chat-section">
-    
+
     <div class="head-chat">
         <button><i class="ri-arrow-left-s-line"></i></button>
         <p>Power Of Memory</p>
     </div>
 
     <div class="chat">
-        
+
         <?php foreach ($messages as $message): ?>
             <?php
-            // Logique pour déterminer l'expéditeur et la classe principale
             $is_user = isUser($message["pseudo"]);
             $message_class = $is_user ? 'msg-me' : 'msg-dt';
             ?>
-            
+
             <div class="<?= $message_class ?>">
-                
+
                 <?php if ($is_user): ?>
                     <div class="msg-me-container">
-                <?php else: ?>
-                    <div class="msg-dt-container">
-                <?php endif; ?>
+                    <?php else: ?>
+                        <div class="msg-dt-container">
+                        <?php endif; ?>
 
                         <figure>
-                            <img class="pp" 
-                                 src="<?= htmlspecialchars(getPhoto($pdo, $message["id"])) ?>" 
-                                 alt="PP de <?= htmlspecialchars($message["pseudo"]) ?>">
+                            <img class="pp"
+                                src="<?= htmlspecialchars(getPhoto($pdo, $message["id"])) ?>"
+                                alt="PP de <?= htmlspecialchars($message["pseudo"]) ?>">
                             <figcaption>
                                 <?php echo htmlspecialchars(formatPseudo($message["pseudo"])) ?>
                             </figcaption>
@@ -139,35 +138,35 @@ function formatPseudo($pseudo)
                             <p><?= htmlspecialchars($message["message"]) ?></p>
                         </div>
 
-                </div> 
+                        </div>
 
-                <small><?= formatMinutesAgo($message["minutes_ago"]) ?></small>
+                        <small><?= formatMinutesAgo($message["minutes_ago"]) ?></small>
+                    </div>
+
+                <?php endforeach; ?>
+
+                <?php
+                $api = "https://api.thecatapi.com/v1/images/search?mime_types=gif";
+
+                $json = @file_get_contents($api);
+                $data = $json ? json_decode($json, true) : null;
+                $gifUrl = $data[0]['url'] ?? null;
+                ?>
+
+                <?php if ($gifUrl): ?>
+                    <img class="gif" src="<?= htmlspecialchars($gifUrl) ?>" alt="Chat GIF">
+                <?php else: ?>
+                    <p>Impossible de charger le GIF.</p>
+                <?php endif; ?>
+
             </div>
-            
-        <?php endforeach; ?>
 
-        <?php
-        $api = "https://api.thecatapi.com/v1/images/search?mime_types=gif";
+            <form method="post">
+                <label for="msg" style="display:none;">Votre message</label>
+                <input type="text" id="msg" name="msg" placeholder="Votre message" autocomplete="off" required>
+                <button type="submit" style="display:none;"></button>
+            </form>
 
-        $json = @file_get_contents($api); 
-        $data = $json ? json_decode($json, true) : null;
-        $gifUrl = $data[0]['url'] ?? null;
-        ?>
-
-        <?php if ($gifUrl): ?>
-            <img class="gif" src="<?= htmlspecialchars($gifUrl) ?>" alt="Chat GIF">
-        <?php else: ?>
-            <p>Impossible de charger le GIF.</p>
-        <?php endif; ?>
-        
-    </div>
-
-    <form method="post">
-        <label for="msg" style="display:none;">Votre message</label>
-        <input type="text" id="msg" name="msg" placeholder="Votre message" autocomplete="off" required>
-        <button type="submit" style="display:none;"></button> 
-        </form>
-    
 </section>
 
 <button class="btn-chat"><i class="ri-arrow-down-s-line"></i></button>

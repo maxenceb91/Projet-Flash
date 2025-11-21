@@ -19,10 +19,9 @@
         $message = $_POST['message'];
         if (empty($firstName) || empty($lastName) || empty($email) || empty($message)) {
             $alert_message = 1;
-            return;
+        } else {
+            $alert_message = 2;
         }
-
-        $alert_message = 2;
     }
     ?>
     <link rel="stylesheet" href="../assets/style/contact.css">
