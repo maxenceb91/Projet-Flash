@@ -5,6 +5,6 @@ $_SESSION = array();
 
 session_destroy();
 
-header("Location: /Projet-flash/views/login.php");
+header("Location: /Projet-flash/index.php");
 exit();
 ?>
