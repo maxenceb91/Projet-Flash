@@ -19,14 +19,16 @@ body {
         font-size: 1.8rem;
     }
 }
-.flex-items{
+
+.flex-items {
     display: flex;
     gap: 5rem;
 
-    div{
+    div {
         margin-top: 2rem;
     }
 }
+
 .edit-pp {
     position: absolute;
     border-radius: 50%;
@@ -49,11 +51,15 @@ body {
         padding: 4rem;
     }
 }
-.flex-items{
-    form,div{
+
+.flex-items {
+
+    form,
+    div {
         width: 100%;
     }
 }
+
 .profile-picture-wrapper:hover {
     .edit-pp {
         opacity: 1;
@@ -142,60 +148,95 @@ form button {
     border: none;
 }
 
-.best-score {
-    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-    padding: 30px;
-    border-radius: 15px;
-    width: 350px;
-    margin: 30px auto;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    font-family: 'Poppins', sans-serif;
+.statistics {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 2rem;
 }
 
-.best-score h1 {
-    text-align: center;
-    font-size: 2em;
-    margin-bottom: 25px;
-    color: #1f2937;
+.statistics h1 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    padding-bottom: 10px;
+}
+
+.played_games p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.best-score p {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
 }
 
 .score {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
-    margin-bottom: 15px;
-    margin-right: 20px;
-    border-radius: 10px;
-    color: #fff;
-    font-weight: 600;
-    transition: transform 0.2s;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    transition: all .3s;
+}
+
+.score:hover {
+    border-color: #d80027;
 }
 
 .score span:first-child {
-    font-size: 1.1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .score span:last-child {
-    font-size: 1.2em;
+    font-weight: 600;
+    color: #d80027;
+    font-size: 1.1rem;
 }
 
-.score.easy { background-color: #2dd36f; }
-.score.medium { background-color: #ffc409; color: #333; }
-.score.hard { background-color: #eb445a; }
 
 .score:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     cursor: pointer;
 }
 
+
+.score.easy {
+    color: greenyellow;
+}
+
+.score.medium span:first-child i {
+    color: #ffc107;
+}
+
+.score.hard span:first-child i {
+    color: #d80027;
+}
+
+.score i {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {}
+
+
 @media (max-width: 768px) {
-    .flex-items{
+    .flex-items {
         flex-direction: column;
     }
+
     .profil {
         max-width: 100%;
+    }
+
+    .statistics h1 {
+        font-size: 1.5rem;
     }
 
     .banner-content {

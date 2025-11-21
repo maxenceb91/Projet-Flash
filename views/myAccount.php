@@ -54,8 +54,18 @@ function getBestScore($user_id, $difficulty)
     $sql = "SELECT MIN(score) as best_score FROM score WHERE user_id = ? AND difficulty = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$user_id, $difficulty]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->fetch();
     return $result['best_score'];
+}
+
+function getPlayedGame($user_id)
+{
+    global $pdo;
+    $sql = "SELECT COUNT(*) as total FROM score WHERE user_id = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$user_id]);
+    $result = $stmt->fetch();
+    return $result['total'];
 }
 ?>
 
@@ -115,19 +125,25 @@ function getBestScore($user_id, $difficulty)
                         <button type="submit">Modifier</button>
                     </form>
 
-                    <div class="best-score">
-                        <h1>Meilleurs scores</h1>
-                        <div class="score easy">
-                            <span><i class="ri-emotion-happy-line"></i> Facile</span>
-                            <span><?php echo getBestScore($_SESSION["user_id"], 1); ?>s</span>
+                    <div class="statistics">
+                        <h1>Statistiques</h1>
+                        <div class="played_games">
+                            <p>Parties Jouées : <?php echo getPlayedGame($_SESSION["user_id"]); ?></p>
                         </div>
-                        <div class="score medium">
-                            <span><i class="ri-emotion-normal-line"></i> Moyen</span>
-                            <span><?php echo getBestScore($_SESSION["user_id"], 2); ?>s</span>
-                        </div>
-                        <div class="score hard">
-                            <span><i class="ri-emotion-unhappy-line"></i> Difficile</span>
-                            <span><?php echo getBestScore($_SESSION["user_id"], 3); ?>s</span>
+                        <div class="best-score">
+                            <p>Meilleurs Scores :</p>
+                            <div class="score easy">
+                                <span><i class="ri-emotion-happy-line"></i> Facile</span>
+                                <span><?php echo getBestScore($_SESSION["user_id"], 1); ?>s</span>
+                            </div>
+                            <div class="score medium">
+                                <span><i class="ri-emotion-normal-line"></i> Moyen</span>
+                                <span><?php echo getBestScore($_SESSION["user_id"], 2); ?>s</span>
+                            </div>
+                            <div class="score hard">
+                                <span><i class="ri-emotion-unhappy-line"></i> Difficile</span>
+                                <span><?php echo getBestScore($_SESSION["user_id"], 3); ?>s</span>
+                            </div>
                         </div>
                     </div>
 
