@@ -109,9 +109,11 @@ function getPlayedGame($user_id)
 
         <div class="container">
             <section class="profil">
-                <h1>Modifier mon profil</h1>
+              
 
                 <div class="flex-items">
+                    <div>
+                      <h2>Modifier mon profil</h2>
                     <form method="post">
                         <label for="pseudo"><i class="ri-pencil-ai-line"></i> Nom d'utilisateur</label>
                         <input type="text" id="pseudo" name="pseudo" value="<?php echo $user['pseudo']; ?>" required>
@@ -124,9 +126,10 @@ function getPlayedGame($user_id)
 
                         <button type="submit">Modifier</button>
                     </form>
+                    </div>
 
                     <div class="statistics">
-                        <h1>Statistiques</h1>
+                        <h2>Statistiques</h2>
                         <div class="played_games">
                             <p>Parties Jouées : <?php echo getPlayedGame($_SESSION["user_id"]); ?></p>
                         </div>

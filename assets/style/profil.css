@@ -150,9 +150,7 @@ form button {
 
 .statistics {
     background-color: transparent;
-    padding: 20px;
     border-radius: 8px;
-    margin-top: 2rem;
 }
 
 .statistics h1 {
@@ -163,12 +161,10 @@ form button {
 }
 
 .played_games p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .best-score p {
-    font-size: 1.5rem;
     color: #fff;
     margin-bottom: 1rem;
 }

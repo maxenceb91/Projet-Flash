@@ -148,7 +148,7 @@ function formatPseudo($pseudo)
 
         <?php
         $api = "https://api.thecatapi.com/v1/images/search?mime_types=gif";
-        // Utilisation de @ pour éviter les warnings en cas d'échec de file_get_contents
+
         $json = @file_get_contents($api); 
         $data = $json ? json_decode($json, true) : null;
         $gifUrl = $data[0]['url'] ?? null;
