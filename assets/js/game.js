@@ -32,7 +32,6 @@ function generateGrid() {
     const selectedSize = sizeSelect.value;
     grid.innerHTML = "";
     grid.classList.remove("grid-4", "grid-6", "grid-10");
-
     let cardCount;
     let gridClass;
 
@@ -56,11 +55,14 @@ function generateGrid() {
 
     grid.classList.add(gridClass);
 
+    const cloneImages = images.slice();
+
     //Choisir les cartes:
     const flipImages = []
     for (let i = 0; i < cardCount / 2; i++) {
-        const index = Math.floor(Math.random() * images.length);
-        const flipImage = images[index];
+        const index = Math.floor(Math.random() * cloneImages.length);
+        const flipImage = cloneImages[index];
+        cloneImages.splice(index, 1)
         for (let i = 0; i < 2; i++) {
             flipImages.push(flipImage);
         }
@@ -106,9 +108,16 @@ function generateGrid() {
                     if (flippedCards[0].flipImage === flippedCards[1].flipImage) {
                         flippedCards.forEach(c => c.isFind = true);
                         if (cards.every(c => c.isFind)) {
-                            alert("Félicitations ! Vous avez trouvé toutes les paires ! (" + timeFormat(time) + ")");
                             clearInterval(timerInterval);
                             start = false;
+                            const replay = confirm(
+                                "Félicitations ! Vous avez trouvé toutes les paires ! (" + timeFormat(time) + ")\n\nVoulez-vous rejouer ?"
+                            );
+
+                            if (replay) {
+                                time = 0;
+                                startGame();
+                            }
                         }
                     } else {
                         wait = true;
@@ -138,6 +147,10 @@ function timeFormat(ms) {
 }
 
 generateBtn.addEventListener("click", () => {
+    startGame();
+});
+
+function startGame() {
     generateGrid();
     start = true;
 
@@ -153,4 +166,4 @@ generateBtn.addEventListener("click", () => {
         time = elapsed;
         chrono.innerHTML = `<i class="ri-timer-line"></i> Chronomètre: ${timeFormat(elapsed)}`;
     }, 10);
-});
+}
