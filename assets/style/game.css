@@ -72,6 +72,7 @@ select {
 .grid-10{
      grid-template-columns: repeat(10, 1fr);
 }
+
 .grid img {
     width: 100%;
     display: block;
