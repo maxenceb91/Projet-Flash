@@ -55,13 +55,23 @@ select {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 50px;
+    gap: 1rem;
     justify-content: center;
     margin: 50px auto;
     max-width: 800px;
 }
 
+.grid-4{
+     grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-6{
+     grid-template-columns: repeat(6, 1fr);
+}
+
+.grid-10{
+     grid-template-columns: repeat(10, 1fr);
+}
 .grid img {
     width: 100%;
     display: block;
