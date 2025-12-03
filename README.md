@@ -4,7 +4,6 @@
 
 - Maxence ([maxenceb91](https://github.com/maxenceb91))
 - Thomas ([kcyvx](https://github.com/kcyvx))
-- Yassine ([yassine95210](https://github.com/yassine95210))
 ## Langages utilisés :
 
 <p align="left">
