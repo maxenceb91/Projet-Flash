@@ -126,8 +126,11 @@ label{
 }
 
 
-.password-box { display: inline-block;
-width: 100%; }
+.password-box { 
+    display: inline-block;
+    width: 100%;
+    gap: 0px;
+}
 
 .password-progress {
     width: 100%;
@@ -149,6 +152,10 @@ width: 100%; }
     -webkit-transition: width .6s ease;
     -o-transition: width .6s ease;
     transition: width .6s ease;
+}
+
+#feedback {
+    margin-top: 15px;
 }
 
 .bg-red {

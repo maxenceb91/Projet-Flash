@@ -20,18 +20,18 @@ passwordInput.addEventListener("input", ()=>{
     let strength = '';
     
     if (passed === 5){
-        strength = 'strong';
+        strength = 'Fort';
         feedback.style.color = 'green';
         passwordBar.classList.add('bg-green');
     }
     else if (passed >= 3){
-        strength = 'medium';
+        strength = 'Moyen';
         feedback.style.color = 'orange'; 
         passwordBar.classList.add('bg-orange'); 
         
     }
     else{
-        strength = 'weak';
+        strength = 'Faible';
         feedback.style.color = 'red';
         passwordBar.classList.add('bg-red'); 
     }
