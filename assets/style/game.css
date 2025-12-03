@@ -84,6 +84,15 @@ select {
     display: block;
 }
 
+.memory-card{
+    transition: all 0.3s;
+}
+
+.memory-card:hover{
+    cursor: pointer;
+    scale: 105%;
+}
+
 label {
     font-size: 11px;
 }
