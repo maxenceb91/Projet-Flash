@@ -48,24 +48,7 @@ require "../../utils/userConexion.php";
         </div>
     </div>
 
-    <div class="grid">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-        <img src="/Projet-flash/assets/img/memory_card.jpg" alt="Memory Card">
-    </div>
+    <div class="grid"></div>
 
     <div class="container">
         <div class="content">
@@ -87,4 +70,5 @@ require "../../utils/userConexion.php";
 
 <script src="/Projet-flash/assets/js/index.js"></script>
 <script src="/Projet-flash/assets/js/header.js"></script>
+<script src="/Projet-flash/assets/js/game.js"></script>
 </html>
