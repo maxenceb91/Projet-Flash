@@ -73,5 +73,5 @@ require "../../utils/userConexion.php";
 
 <script src="/Projet-flash/assets/js/index.js"></script>
 <script src="/Projet-flash/assets/js/header.js"></script>
-<script src="/Projet-flash/assets/js/game.js"></script>
+<script type="module" src="/Projet-flash/assets/js/game.js"></script>
 </html>
