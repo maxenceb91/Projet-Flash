@@ -41,7 +41,8 @@ require "../../utils/userConexion.php";
             <div>
                 <label for="theme">THÈMES:</label>
                 <select id="theme" name="theme">
-                    <option value="JeuxVidéo">JeuxVidéo</option>
+                    <option value="game">Jeux Vidéo</option>
+                    <option value="aléatoire">Aléatoire</option>
                 </select>
             </div>
             <button>Générer une grille</button>

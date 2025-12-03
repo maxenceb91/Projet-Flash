@@ -1,6 +1,7 @@
 const grid = document.querySelector(".grid");
 const sizeSelect = document.getElementById("size");
 const generateBtn = document.querySelector(".parameters button");
+
 function generateGrid() {
     const selectedSize = sizeSelect.value;
 
@@ -42,17 +43,34 @@ function generateGrid() {
     console.log(`Grille ${selectedSize} générée avec ${cardCount} cartes`);
 }
 
-let time = 0;
+let startTime;
+let chrono;
+let timerInterval;
 
-generateBtn.addEventListener("click", (event) => {
-    generateGrid()
-    chrono = document.createElement("p")
-    chrono.innerHTML = `<i class="ri-timer-line"></i> Chronomètre: 0`;
-    document.querySelector(".game").appendChild(chrono)
-    setInterval(() => {
-        time++
-        chrono.innerHTML = `<i class="ri-timer-line"></i> Chronomètre: ${time}`;
-    }, 1000);
+function timeFormat(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const milliseconds = ms % 1000;
+    return `${minutes}m ${seconds}s ${milliseconds}ms`;
+}
+
+generateBtn.addEventListener("click", () => {
+    generateGrid();
+
+    if (!chrono) {
+        chrono = document.createElement("p");
+        document.querySelector(".game").appendChild(chrono);
+    }
+
+    startTime = Date.now();
+
+    if (timerInterval) clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        chrono.innerHTML = `<i class="ri-timer-line"></i> Chronomètre: ${timeFormat(elapsed)}`;
+    }, 10);
 });
 
 generateGrid();
