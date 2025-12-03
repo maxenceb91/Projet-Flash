@@ -59,7 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label>Pseudo</label>
                     <input type="text" name="pseudo" placeholder="Minimum 4 caractères" required>
                     <label>Mot de passe</label>
-                    <input type="password" name="password" placeholder="8 caractères minimum" required>
+                    <input id = "password" type="password" name="password" placeholder="8 caractères minimum" required>
+                    <div class="password-box">
+
+                        <div class="password-progress">
+                            <div class="progress-bar" id="password-bar"></div>
+                        </div>
+
+                        <p id="feedback"></p>
+                    </div>
                     <label>Confirmer le mot de passe</label>
                     <input type="password" name="confirm_password" placeholder="8 caractères minimum" required>
                     <button type="submit" class="login-btn">Inscription</button>
@@ -81,5 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <img src="../assets/img/Art.png">
         </div>
     </div>
+    <script src="/Projet-flash/assets/js/password.js"></script>
+
 </body>
 </html>
