@@ -35,4 +35,4 @@ input.addEventListener("keydown", (event) => {
     }
 });
 
-setInterval(loadMessages, 10);
+setInterval(loadMessages, 1000);
