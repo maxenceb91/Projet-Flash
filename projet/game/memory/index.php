@@ -42,6 +42,7 @@ require "../../utils/userConexion.php";
                 <label for="theme">THÈMES:</label>
                 <select id="theme" name="theme">
                     <option value="dev">Dev</option>
+                    <option value="psg">PSG</option>
                 </select>
             </div>
             <button>Générer une grille</button>

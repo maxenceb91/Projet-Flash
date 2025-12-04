@@ -1,7 +1,8 @@
-import { images } from "./images.js";
+import { devImages, psgImages } from "./images.js";
 
 const grid = document.querySelector(".grid");
 const sizeSelect = document.getElementById("size");
+const themeSelect = document.getElementById("theme");
 const generateBtn = document.querySelector(".parameters button");
 const cards = [];
 let wait = false;
@@ -30,6 +31,7 @@ class Card {
 
 function generateGrid() {
     const selectedSize = sizeSelect.value;
+    const selectedTheme = themeSelect.value;
     grid.innerHTML = "";
     grid.classList.remove("grid-4", "grid-6", "grid-10");
     let cardCount;
@@ -55,9 +57,9 @@ function generateGrid() {
 
     grid.classList.add(gridClass);
 
-    const cloneImages = images.slice();
+    const selectedImages = selectedTheme == "dev" ? devImages : psgImages;
+    const cloneImages = selectedImages.slice();
 
-    //Choisir les cartes:
     const flipImages = []
     for (let i = 0; i < cardCount / 2; i++) {
         const index = Math.floor(Math.random() * cloneImages.length);
@@ -68,10 +70,10 @@ function generateGrid() {
         }
     }
 
-    flipImages.sort(() => Math.random() - 0.5); //pour mélanger
+    flipImages.sort(() => Math.random() - 0.5);
 
-    //Initialiser les cartes choisis:
     cards.length = 0;
+    let i = 0;
     flipImages.forEach((flipImage) => {
         const cardContainer = document.createElement("div");
         cardContainer.classList.add("card-container");
@@ -90,10 +92,13 @@ function generateGrid() {
         cardElement.appendChild(faceFront);
         cardElement.appendChild(faceBack);
         cardContainer.appendChild(cardElement);
+
         grid.appendChild(cardContainer);
 
         const cardObj = new Card(cardElement, flipImage);
         cards.push(cardObj);
+
+        i++;
 
         cardContainer.addEventListener("click", () => {
             if (!start || wait) return;

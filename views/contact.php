@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-
 <head>
     <?php
     include_once "../projet/partials/head.php";

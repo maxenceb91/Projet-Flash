@@ -1,4 +1,4 @@
-export const images = [
+export const devImages = [
   // 1–10 : Langages
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
@@ -58,4 +58,61 @@ export const images = [
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg",
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg",
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg"
+];
+
+export const psgImages = [
+  "/Projet-flash/assets/img/psg/img1.png",
+  "/Projet-flash/assets/img/psg/img2.png",
+  "/Projet-flash/assets/img/psg/img3.png",
+  "/Projet-flash/assets/img/psg/img4.png",
+  "/Projet-flash/assets/img/psg/img5.png",
+  "/Projet-flash/assets/img/psg/img6.png",
+  "/Projet-flash/assets/img/psg/img7.png",
+  "/Projet-flash/assets/img/psg/img8.png",
+  "/Projet-flash/assets/img/psg/img9.png",
+  "/Projet-flash/assets/img/psg/img10.png",
+  
+  "/Projet-flash/assets/img/psg/img11.png",
+  "/Projet-flash/assets/img/psg/img12.png",
+  "/Projet-flash/assets/img/psg/img13.png",
+  "/Projet-flash/assets/img/psg/img14.png",
+  "/Projet-flash/assets/img/psg/img15.png",
+  "/Projet-flash/assets/img/psg/img16.png",
+  "/Projet-flash/assets/img/psg/img17.png",
+  "/Projet-flash/assets/img/psg/img18.png",
+  "/Projet-flash/assets/img/psg/img19.png",
+  "/Projet-flash/assets/img/psg/img20.png",
+
+  "/Projet-flash/assets/img/psg/img21.png",
+  "/Projet-flash/assets/img/psg/img22.png",
+  "/Projet-flash/assets/img/psg/img23.png",
+  "/Projet-flash/assets/img/psg/img24.png",
+  "/Projet-flash/assets/img/psg/img25.png",
+  "/Projet-flash/assets/img/psg/img26.png",
+  "/Projet-flash/assets/img/psg/img27.png",
+  "/Projet-flash/assets/img/psg/img28.png",
+  "/Projet-flash/assets/img/psg/img29.png",
+  "/Projet-flash/assets/img/psg/img30.png",
+
+  "/Projet-flash/assets/img/psg/img31.png",
+  "/Projet-flash/assets/img/psg/img32.png",
+  "/Projet-flash/assets/img/psg/img33.png",
+  "/Projet-flash/assets/img/psg/img34.png",
+  "/Projet-flash/assets/img/psg/img35.png",
+  "/Projet-flash/assets/img/psg/img36.png",
+  "/Projet-flash/assets/img/psg/img37.png",
+  "/Projet-flash/assets/img/psg/img38.png",
+  "/Projet-flash/assets/img/psg/img39.png",
+  "/Projet-flash/assets/img/psg/img40.png",
+
+  "/Projet-flash/assets/img/psg/img41.jpg",
+  "/Projet-flash/assets/img/psg/img42.png",
+  "/Projet-flash/assets/img/psg/img43.png",
+  "/Projet-flash/assets/img/psg/img44.png",
+  "/Projet-flash/assets/img/psg/img45.png",
+  "/Projet-flash/assets/img/psg/img46.png",
+  "/Projet-flash/assets/img/psg/img47.png",
+  "/Projet-flash/assets/img/psg/img48.png",
+  "/Projet-flash/assets/img/psg/img49.png",
+  "/Projet-flash/assets/img/psg/img50.png"
 ];

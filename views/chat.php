@@ -1,6 +1,4 @@
 <?php
-global $pdo;
-
 $request = $pdo->prepare('
 SELECT
     t1.message,
@@ -28,16 +26,6 @@ $messages = $request->fetchAll();
 function isUser($pseudo)
 {
     return (isset($_SESSION["user_pseudo"]) && $_SESSION["user_pseudo"] == $pseudo);
-}
-
-function addMessage($game, $sender_id, $message)
-{
-    global $pdo;
-    $request = $pdo->prepare('INSERT INTO message (game_id, user_id, message, created_at) VALUES (?, ?, ?, NOW());');
-    $request->bindValue(1, $game, PDO::PARAM_INT);
-    $request->bindValue(2, $sender_id, PDO::PARAM_INT);
-    $request->bindValue(3, $message, PDO::PARAM_STR);
-    $request->execute();
 }
 
 function formatMinutesAgo($minutes)
@@ -73,19 +61,6 @@ function getPhoto($pdo, $user_id)
     return $photo;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $msg = trim($_POST['msg']);
-    if (empty($msg)) {
-        return;
-    }
-
-    if (isset($_SESSION["user_id"])) {
-        addMessage(1, $_SESSION["user_id"], $msg);
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-        exit;
-    }
-}
-
 function formatPseudo($pseudo)
 {
     $parts = explode(' ', trim($pseudo));
@@ -108,63 +83,19 @@ function formatPseudo($pseudo)
     </div>
 
     <div class="chat">
+        <?php
+        include __DIR__ . '/utils/load_messages.php';
+        ?>
+    </div>
 
-        <?php foreach ($messages as $message): ?>
-            <?php
-            $is_user = isUser($message["pseudo"]);
-            $message_class = $is_user ? 'msg-me' : 'msg-dt';
-            ?>
-
-            <div class="<?= $message_class ?>">
-
-                <?php if ($is_user): ?>
-                    <div class="msg-me-container">
-                    <?php else: ?>
-                        <div class="msg-dt-container">
-                        <?php endif; ?>
-
-                        <figure>
-                            <img class="pp"
-                                src="<?= htmlspecialchars(getPhoto($pdo, $message["id"])) ?>"
-                                alt="PP de <?= htmlspecialchars($message["pseudo"]) ?>">
-                            <figcaption>
-                                <?php echo htmlspecialchars(formatPseudo($message["pseudo"])) ?>
-                            </figcaption>
-                        </figure>
-
-                        <div class="msg">
-                            <p><?= htmlspecialchars($message["message"]) ?></p>
-                        </div>
-
-                        </div>
-
-                        <small><?= formatMinutesAgo($message["minutes_ago"]) ?></small>
-                    </div>
-
-                <?php endforeach; ?>
-
-                <?php
-                $api = "https://api.thecatapi.com/v1/images/search?mime_types=gif";
-
-                $json = @file_get_contents($api);
-                $data = $json ? json_decode($json, true) : null;
-                $gifUrl = $data[0]['url'] ?? null;
-                ?>
-
-                <?php if ($gifUrl): ?>
-                    <img class="gif" src="<?= htmlspecialchars($gifUrl) ?>" alt="Chat GIF">
-                <?php else: ?>
-                    <p>Impossible de charger le GIF.</p>
-                <?php endif; ?>
-
-            </div>
-
-            <form method="post">
-                <label for="msg" style="display:none;">Votre message</label>
-                <input type="text" id="msg" name="msg" placeholder="Votre message" autocomplete="off" required>
-                <button type="submit" style="display:none;"></button>
-            </form>
+    <form>
+        <label for="msg" style="display:none;">Votre message</label>
+        <input type="text" id="msg" name="message" placeholder="Votre message" autocomplete="off" required>
+        <button type="submit" style="display:none;"></button>
+    </form>
 
 </section>
 
 <button class="btn-chat"><i class="ri-arrow-down-s-line"></i></button>
+
+<script src="/Projet-flash/assets/js/chat.js"></script>
