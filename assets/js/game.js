@@ -110,6 +110,25 @@ function generateGrid() {
                         if (cards.every(c => c.isFind)) {
                             clearInterval(timerInterval);
                             start = false;
+
+                            const timeSeconds = Math.floor(time / 1000);
+                            fetch("/Projet-flash/projet/utils/save_score.php", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                body:
+                                    "user_id=" + encodeURIComponent(1) +
+                                    "&game_id=" + encodeURIComponent(1) +
+                                    "&difficulty=" + encodeURIComponent(sizeSelect.value === "4x4" ? 1 : sizeSelect.value === "6x6" ? 2 : 3) +
+                                    "&score=" + encodeURIComponent(timeSeconds)
+                            })
+                                .then(res => res.text())
+                                .then(data => console.log("Score enregistré :", data))
+                                .catch(err => console.error("Erreur AJAX :", err));
+
+
+
                             const replay = confirm(
                                 "Félicitations ! Vous avez trouvé toutes les paires ! (" + timeFormat(time) + ")\n\nVoulez-vous rejouer ?"
                             );
