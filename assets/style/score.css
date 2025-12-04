@@ -1,51 +1,55 @@
 body {
   font-family: 'Poppins', sans-serif;
 
-    background-color: #070320;
-    color: #fff;
+  background-color: #070320;
+  color: #fff;
 }
-.highlight{
-  color: #ff0000;
-  text-shadow: 0 0 3px #fff,0 0 0 #ff0000,0 0 30px #ff0000,0 0 0 #ff0000,0 0 9px #ff0000;
-}
-.settings{
-  display: flex;
-  gap: 5rem;
-  margin-top: 5rem;
-  label, input, select{
-    display: block;
-  }
 
-  input, select{
+.highlight {
+  color: #ff0000;
+  text-shadow: 0 0 3px #fff, 0 0 0 #ff0000, 0 0 30px #ff0000, 0 0 0 #ff0000, 0 0 9px #ff0000;
+}
+
+.settings form {
+    display: flex;
+    gap: 2rem;
+    margin-top: 100px;
+    align-items: flex-end;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field input,
+.field select {
     width: 200px;
     padding: 14px 28px;
     border-radius: 8px;
     border: none;
     outline: none;
-    background: #fff;
     cursor: pointer;
-    margin-top: .4rem;
+}
+
+.hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+
+  p {
+    margin-top: 1rem;
+    max-width: 500px;
   }
 }
-.hero{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10rem;
-
-    p{
-        margin-top: 1rem;
-        max-width: 500px;
-    }
-}
-
-
 
 table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 10px; /* espace vertical entre les lignes */
+  border-spacing: 0 10px;
+  /* espace vertical entre les lignes */
   font-family: Arial, sans-serif;
   font-size: 14px;
   text-align: left;
@@ -94,21 +98,23 @@ td span {
   vertical-align: middle;
 }
 
-.flex-2{
+.flex-2 {
   display: flex;
   gap: 20px;
   margin-top: 15rem;
   align-items: center;
-  div, img{
+
+  div,
+  img {
     width: 100%;
 
   }
 
-  p{
+  p {
     margin-top: 2rem;
   }
 
-  button{
+  button {
     padding: 15px 45px;
     background-color: red;
     color: #fff;
@@ -117,9 +123,8 @@ td span {
   }
 }
 
-@media (max-width: 768px){
-  .flex-2{
+@media (max-width: 768px) {
+  .flex-2 {
     flex-direction: column;
   }
 }
-

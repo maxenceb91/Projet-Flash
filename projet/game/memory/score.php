@@ -45,14 +45,11 @@ function getQuery()
     }
 }
 
-function getSearchScore($char)
+function getSearchScore($char, $difficulty)
 {
-    if ($char == "") {
-        return getScores();
-    }
-
     global $pdo;
-    $request = $pdo->prepare('
+
+    $sql = '
         SELECT 
             game.name AS game_name, 
             user.pseudo AS user_pseudo, 
@@ -62,19 +59,40 @@ function getSearchScore($char)
         FROM score
         JOIN user ON user.id = score.user_id
         JOIN game ON game.id = score.game_id
-        WHERE user.pseudo LIKE :char
-        ORDER BY game.name, score.difficulty DESC, score.score
-    ');
+        WHERE 1
+    ';
 
-    $request->execute(['char' => "%$char%"]);
+    $params = [];
+
+    if ($char !== "") {
+        $sql .= " AND user.pseudo LIKE :char";
+        $params["char"] = "%$char%";
+    }
+
+    if ($difficulty !== "") {
+        $sql .= " AND score.difficulty = :difficulty";
+        $params["difficulty"] = $difficulty;
+    }
+
+    $sql .= " ORDER BY game.name, score.difficulty DESC, score.score";
+
+    $request = $pdo->prepare($sql);
+    $request->execute($params);
 
     return $request->fetchAll();
 }
-function isPlayer($pseudo){
-    if (isset($_SESSION['user_pseudo'])){
+
+function isPlayer($pseudo)
+{
+    if (isset($_SESSION['user_pseudo'])) {
         return $_SESSION['user_pseudo'] == $pseudo;
     }
     return false;
+}
+
+function getDifficulty()
+{
+    return isset($_GET["difficulty"]) ? $_GET["difficulty"] : "";
 }
 
 session_start()
@@ -108,19 +126,25 @@ session_start()
 
         <div class="settings">
             <form class="search-bar" method="get">
-                <label for="search-bar">Rechercher</label>
-                <input id="search-bar" value="<?= htmlspecialchars(getQuery()) ?>" name="q" type="text">
-            </form>
 
-            <div>
-                <label for="difficulty">Difficulté</label>
-                <select id="difficulty" name="difficulty">
-                    <option value="1">Facile</option>
-                    <option value="2">Moyen</option>
-                    <option value="3">Difficile</option>
-                </select>
-            </div>
+                <div class="field">
+                    <label for="search-bar">Rechercher</label>
+                    <input id="search-bar" value="<?= htmlspecialchars(getQuery()) ?>" name="q" type="text">
+                </div>
+
+                <div class="field">
+                    <label for="difficulty">Difficulté</label>
+                    <select id="difficulty" name="difficulty" onchange="this.form.submit()">
+                        <option value="">Toutes</option>
+                        <option value="1" <?= getDifficulty() == 1 ? "selected" : "" ?>>Facile</option>
+                        <option value="2" <?= getDifficulty() == 2 ? "selected" : "" ?>>Moyen</option>
+                        <option value="3" <?= getDifficulty() == 3 ? "selected" : "" ?>>Difficile</option>
+                    </select>
+                </div>
+
+            </form>
         </div>
+
 
         <section class="scoreboard">
             <table>
@@ -136,7 +160,7 @@ session_start()
                 </thead>
                 <tbody>
                     <?php
-                    $scores = getSearchScore(getQuery());
+                    $scores = getSearchScore(getQuery(), getDifficulty());
                     $i = 0;
                     foreach ($scores as $score) {
                         $i++;
@@ -228,4 +252,5 @@ session_start()
 
 </body>
 <script src="/Projet-flash/assets/js/header.js"></script>
+
 </html>
