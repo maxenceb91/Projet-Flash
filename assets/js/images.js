@@ -15,7 +15,7 @@ export const devImages = [
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ruby/ruby-original.svg",
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/lua/lua-original.svg",
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg",
-  "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-plain.svg",
+  "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg",
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg",
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg",
   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg",

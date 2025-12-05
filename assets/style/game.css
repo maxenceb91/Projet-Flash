@@ -57,6 +57,12 @@ select {
     border: none;
     cursor: pointer;
     width: 100%;
+    transition: all 0.3s ease;
+}
+
+.parameters button:hover {
+    background: linear-gradient(90deg, #d10404 0%, #cd6702 100%);
+    scale: 105%;
 }
 
 .grid {
@@ -67,16 +73,16 @@ select {
     max-width: 800px;
 }
 
-.grid-4{
-     grid-template-columns: repeat(4, 1fr);
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
 }
 
-.grid-6{
-     grid-template-columns: repeat(6, 1fr);
+.grid-6 {
+    grid-template-columns: repeat(6, 1fr);
 }
 
-.grid-10{
-     grid-template-columns: repeat(10, 1fr);
+.grid-10 {
+    grid-template-columns: repeat(10, 1fr);
 }
 
 .grid img {
@@ -84,11 +90,11 @@ select {
     display: block;
 }
 
-.memory-card{
+.memory-card {
     transition: all 0.3s;
 }
 
-.memory-card:hover{
+.memory-card:hover {
     cursor: pointer;
     scale: 105%;
 }
@@ -122,7 +128,7 @@ select {
 }
 
 .face-front {
-    background-image: url("/Projet-flash/assets/img/card.png"); 
+    background-image: url("/Projet-flash/assets/img/card.png");
     background-size: cover;
     background-position: center;
 }
@@ -133,7 +139,7 @@ select {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10%; 
+    padding: 10%;
 }
 
 .face-back img {
@@ -226,7 +232,7 @@ label {
 .msg-dt,
 .msg-me {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     margin-top: 2rem;
     max-width: 80%;
 }
@@ -267,7 +273,7 @@ figcaption {
 }
 
 .msg-me-container {
-    flex-direction: row-reverse; 
+    flex-direction: row-reverse;
 }
 
 .msg-me .msg {
@@ -282,7 +288,7 @@ figcaption {
 }
 
 .msg-dt-container {
-    flex-direction: row; 
+    flex-direction: row;
 }
 
 .msg-dt .msg {
@@ -388,4 +394,3 @@ form {
         margin-top: 10rem;
     }
 }
-
