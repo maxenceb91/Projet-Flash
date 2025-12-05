@@ -198,6 +198,7 @@ label {
     overflow: hidden;
     min-height: 550px;
     transition: .3s;
+    z-index: 10;
 }
 
 .head-chat {
